@@ -1,4 +1,4 @@
-{-
+
 Telco
 
 Es una compañia que se dedica a comunicar las ciudades que se susbcriben a su servicio.
@@ -8,8 +8,23 @@ Finalmente establece canales que conectan distintas ciudades ocupando una unidad
 capacidad por cada enlace recorrido.
 
 Para sostener este modelo se cuenta con las siguientes entidades:
--}
 
+module Point ( Point, newP, difP)
+   where
+
+data Point = Poi Int Int deriving (Eq, Show)
+
+newP :: Int -> Int -> Point
+difP :: Point -> Point -> Float  -- distancia absoluta
+-----------------
+module City ( City, newC, nameC, distanceC )
+   where
+
+data City = Cit String Point deriving (Eq, Show)
+
+newC :: String -> Point -> City
+nameC :: City -> String
+distanceC :: City -> City -> Float
 -----------------
 module Quality ( Quality, newQ, capacityQ, delayQ )
    where
