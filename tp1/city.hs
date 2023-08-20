@@ -10,6 +10,7 @@ newC = Cit
 -- newC name coordinates = Cit name coordinates
 
 nameC :: City -> String
+nameC (Cit name _) = name
 
 distanceC :: City -> City -> Float
 distanceC (Cit _ coordinates1) (Cit _ coordinates2) = difP coordinates1 coordinates2
