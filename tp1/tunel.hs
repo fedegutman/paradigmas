@@ -1,4 +1,4 @@
-module Tunel ( Tunel, newT, connectsT, usesT, delayT )
+module Tunel (Tunel, newT, connectsT, usesT, delayT)
    where
 
 data Tunel = Tun [Link] deriving (Eq, Show)
