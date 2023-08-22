@@ -3,6 +3,7 @@ module Tunel (Tunel, newT, connectsT, usesT, delayT)
 
 import Link
 import City
+import Quality
 
 data Tunel = Tun [Link] deriving (Eq, Show)
 
@@ -16,3 +17,4 @@ connectsT cityA cityB (Tun [Lin city1 city2 _]) = ((cityA == city1) && (cityB ==
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
+delayT (Tun [Lin _ _ (Qua _ _ delay)]) = delay
