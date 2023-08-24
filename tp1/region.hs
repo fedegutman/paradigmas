@@ -24,7 +24,7 @@ connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades est
 connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels  
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
-linkedR (Reg cit link tunnels) cityA cityB = linksL
+linkedR (Reg cit link tunnels) cityA cityB =  or (map (linksL cityA cityB) link)  
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 
