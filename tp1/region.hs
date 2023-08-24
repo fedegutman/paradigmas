@@ -4,6 +4,7 @@ module Region (Region, newR, foundR, linkR, tunelR, pathR, linksForR, connectedR
 import City
 import Link
 import Tunel
+import Quality
 
 data Region = Reg [City] [Link] [Tunel]
 
