@@ -18,7 +18,7 @@ linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de l
 linkR (Reg cit links tunels) cityA cityB calidad = Reg (cit (newL cityA cityB calidad : links) tunels)
 
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR Reg cit links tunels [cities] = Reg cit links  --INCOMPLETO!!!!!!
+tunelR Reg cit links tunels [cities] = Reg cit links  --INCOMPLETO
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels  
