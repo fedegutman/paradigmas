@@ -8,8 +8,8 @@ import Quality
 data Tunel = Tun [Link] deriving (Eq, Show)
 
 newT :: [Link] -> Tunel
-newT |
-     | otherwise = error "No hay capacidad para más tuneles."
+newT links |  
+           | otherwise = error "No hay capacidad para más tuneles."
 
 connectsT :: City -> City -> Tunel -> Bool -- inidca si este tunel conceta estas dos ciudades distintas
 -- diferencia entre esto y linksl
