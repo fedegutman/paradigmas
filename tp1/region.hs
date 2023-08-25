@@ -21,10 +21,10 @@ tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciu
 tunelR Reg cit links tunels [cities] = Reg cit links  --INCOMPLETO
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels  
+connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
-linkedR (Reg cit link tunnels) cityA cityB =  or (map (linksL cityA cityB) link)  
+linkedR (Reg cit link tunnels) cityA cityB =  any (linksL cityA cityB) link
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 
