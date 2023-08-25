@@ -20,7 +20,6 @@ eslaultima city (Tun []) = False
 eslautlima :: City -> Tunel -> Bool
 eslautlima city (Tun [links]) = connectsL city (last [links]) && not (connectsL city (last (init [links])))
 
-
 connectsT :: City -> City -> Tunel -> Bool
 connectsT cityA cityB (Tun enlaces) = (eslaprimera cityA (Tun enlaces) && eslaultima cityB (Tun enlaces)) ||(eslaprimera cityB (Tun enlaces) && eslaultima cityA (Tun enlaces))
 -- diferencia entre esto y linksl
