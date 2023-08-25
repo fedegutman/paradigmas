@@ -12,7 +12,7 @@ newR :: Region
 newR = Reg [] [] []
 
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
-foundR (Reg cit links tunels) city = Reg ((city : cit) links tunels)
+foundR (Reg cit links tunels) city = Reg (city : cit) links tunels
 
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
 linkR (Reg cit links tunels) cityA cityB calidad = Reg (cit (newL cityA cityB calidad : links) tunels)
