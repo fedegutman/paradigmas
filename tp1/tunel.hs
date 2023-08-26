@@ -15,7 +15,7 @@ firstcity :: City -> Tunel -> Bool
 firstcity city (Tun (first: rest)) = connectsL city first && not (connectsL city (head rest))
 
 lastcity :: City -> Tunel -> Bool
-lastcity city (Tun [links]) = connectsL city (last [links]) && not (connectsL city (last (init [links])))
+lastcity city (Tun links) = connectsL city (last links) && not (connectsL city (last (init links)))
 
 connectsT :: City -> City -> Tunel -> Bool
 connectsT cityA cityB (Tun links) | length links == 1 = linksL cityA cityB (head links)
