@@ -43,4 +43,8 @@ encontarTunel Reg _ _ tunel cityA cityB = head (filter (connectsT cityA cityB) t
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR Reg _ _ tunnels cityA cityB = delayT (encontarTunel Reg _ _ tunnels cityA cityB)  
 
+encontarCapacitymasBaja :: Tunel -> Int
+encontarCapacitymasBaja tunel links = minimum (map capacityL links) 
+
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
+availableCapacityForR reg _ _ tunel links = 
