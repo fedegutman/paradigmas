@@ -18,8 +18,17 @@ linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de l
 linkR (Reg cit links tunels) cityA cityB calidad | cityA `elem` cit && cityB `elem` cit = Reg (cit (newL cityA cityB calidad : links) tunels)
                                                  | otherwise = error "Al menos una de las dos ciudades no está en la región"
 
+ciudadesConsecutivas :: [a] -> [[a]]
+ciudadesConsecutivas [] = []
+ciudadesConsecutivas [_] = []
+ciudadesConsecutivas (x:y:xs) = [x, y] : ciudadesConsecutivas (y:xs)
+
+
+
+
+
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR Reg cit links tunels [cities] = Reg cit links  --INCOMPLETO
+tunelR Reg cit links tunels [cities] =
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels
