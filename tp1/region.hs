@@ -10,6 +10,7 @@ data Region = Reg [City] [Link] [Tunel]
 
 newR :: Region
 newR = Reg
+-- newR = Reg [] [] []
 
 foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg cit links tunels) city = Reg (city : cit) links tunels

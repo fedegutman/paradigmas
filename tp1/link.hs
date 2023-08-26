@@ -18,7 +18,7 @@ linksL :: City -> City -> Link -> Bool -- indica si estas dos ciudades distintas
 linksL cityA cityB (Lin city1 city2 _) = ((cityA == city1) && (cityB == city2)) || ((cityB == city1) && (cityA == city2))
 
 capacityL :: Link -> Int
-capacityL (Lin _ _ qua) = capacityQ qua
+capacityL (Lin _ _ quality) = capacityQ quality
 
 delayL :: Link -> Float     -- la demora que sufre una conexion en este canal
 delayL (Lin cityA cityB qua) = (delayQ qua)*(distanceC cityA cityB)
