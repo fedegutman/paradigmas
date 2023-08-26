@@ -1,3 +1,4 @@
+
 module Region (Region, newR, foundR, linkR, tunelR, pathR, linksForR, connectedR, linkedR, delayR, availableCapacityForR, usedCapacityForR)
    where
 
@@ -25,7 +26,7 @@ ciudadesConsecutivas [_] = []
 ciudadesConsecutivas (x:y:xs) = [x, y] : ciudadesConsecutivas (y:xs)
 
 link2ciudadeslist :: [City] -> Link --pasa una lista de dos ciudades y crea el link entre ellas
-link2ciudadeslist [cityA,CityB] = newL cityA CityB _   
+link2ciudadeslist [cityA,cityB] = newL cityA cityB _   
 
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR Reg cit links tunels [cities] = Reg cit links newT(map link2ciudadeslist (ciudadesConsecutivas [cities])):tunels
@@ -36,7 +37,10 @@ connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 linkedR (Reg cit link tunnels) cityA cityB =  any (linksL cityA cityB) link
 
+encontarTunel :: Region -> City -> City -> Tunel
+encontarTunel Reg _ _ tunel cityA cityB = head (filter connectsT cityA cityB tunel)
+
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
-delayR Reg city link tunnels cityA cityB | connectsT cityA cityB tunnels = 
+delayR Reg _ _ tunnels cityA cityB = delayT (encontarTunel Reg _ _ tunnels cityA cityB)  
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
