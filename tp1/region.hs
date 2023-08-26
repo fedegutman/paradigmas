@@ -24,12 +24,11 @@ ciudadesConsecutivas [] = []
 ciudadesConsecutivas [_] = []
 ciudadesConsecutivas (x:y:xs) = [x, y] : ciudadesConsecutivas (y:xs)
 
-
-
-
+link2ciudadeslist :: [City] -> Link --pasa una lista de dos ciudades y crea el link entre ellas
+link2ciudadeslist [cityA,CityB] = newL cityA CityB _   
 
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR Reg cit links tunels [cities] =
+tunelR Reg cit links tunels [cities] = Reg cit links newT(map link2ciudadeslist (ciudadesConsecutivas [cities])):tunels
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels
