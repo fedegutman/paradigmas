@@ -38,7 +38,7 @@ linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan 
 linkedR (Reg cit link tunnels) cityA cityB =  any (linksL cityA cityB) link
 
 encontarTunel :: Region -> City -> City -> Tunel
-encontarTunel Reg _ _ tunel cityA cityB = head (filter connectsT cityA cityB tunel)
+encontarTunel Reg _ _ tunel cityA cityB = head (filter (connectsT cityA cityB) tunel)
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
 delayR Reg _ _ tunnels cityA cityB = delayT (encontarTunel Reg _ _ tunnels cityA cityB)  
