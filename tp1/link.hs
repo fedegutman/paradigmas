@@ -1,5 +1,3 @@
-{- Un Link es el medio físico que une dos ciudades. -}
-
 module Link (Link, newL, linksL, connectsL, capacityL, delayL)
    where
 

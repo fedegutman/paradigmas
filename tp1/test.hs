@@ -4,17 +4,39 @@ import Quality
 import Link
 import Tunel
 
-coordenadas1 = newP 5 2
-coordenadas2 = newP 7 11
-coordenadas3 = newP 2 4
+-----------------------------------------
+
+coordenadasBsas = newP 5 2
+coordenadasPinamar = newP 6 8
+coordenadasGesell = newP 7 11
+coordenadasMdq = newP 7 14
+
+-----------------------------------------
+
+buenosAires = newC "Buenos Aires" coordenadasBsas
+pinamar = newC "Pinamar" coordenadasPinamar
+villaGesell = newC "Villa Gesell" coordenadasGesell
+marDelPlata = newC "Mar del Plata" coordenadasMdq
+
+distanciaBsasMdq = distanceC buenosAires marDelPlata
+
+-----------------------------------------
+
+quality1 = newQ "Bsas-Pinamar" 2 50
+quality2 = newQ "Pinamar-Gesell" 1 15
+quality3 = newQ "Gesell-Mdq" 3 30
+
+-----------------------------------------
+
+bsasPinamar = newL buenosAires pinamar quality1
+pinamarGesell = newL pinamar villaGesell quality2
+gesellMdq = newL villaGesell marDelPlata quality3
+
+delayPinamarGesell = delayL pinamarGesell
+
+-----------------------------------------
+
+tunel = newT [bsasPinamar, pinamarGesell, gesellMdq]
 
 
-bsas = newC "Buenos Aires" coordenadas1
-mdq = newC "Mar del Plata" coordenadas2
-pinamar = newC "Pinamar" coordenadas3
-
-quality = newQ "Bsas-Mdq" 2 50
-
-mdq_bsas = newL bsas mdq quality
-
-tiempo = delayL mdq_bsas
+-----------------------------------------

@@ -9,23 +9,21 @@ data Tunel = Tun [Link] deriving (Eq, Show)
 
 
 newT :: [Link] -> Tunel
-newT = Tun 
+newT = Tun
 
-eslaprimera :: City -> Tunel -> Bool
-eslaprimera city (Tun []) = False
-eslaprimera city (Tun (primera: lossiguientes)) = connectsL city primera && not (connectsL city (head lossiguientes))
+firstcity :: City -> Tunel -> Bool
+firstcity city (Tun (first: rest)) = connectsL city first && not (connectsL city (head rest))
 
-eslaultima :: City -> Tunel -> Bool
-eslaultima city (Tun []) = False
-eslautlima :: City -> Tunel -> Bool
-eslautlima city (Tun [links]) = connectsL city (last [links]) && not (connectsL city (last (init [links])))
+lastcity :: City -> Tunel -> Bool
+lastcity city (Tun [links]) = connectsL city (last [links]) && not (connectsL city (last (init [links])))
 
 connectsT :: City -> City -> Tunel -> Bool
-connectsT cityA cityB (Tun enlaces) = (eslaprimera cityA (Tun enlaces) && eslaultima cityB (Tun enlaces)) ||(eslaprimera cityB (Tun enlaces) && eslaultima cityA (Tun enlaces))
--- diferencia entre esto y linksl
+connectsT cityA cityB (Tun links) | length links == 1 = linksL cityA cityB (head links)
+                                  | null links = False
+                                  | otherwise = (firstcity cityA (Tun links) && lastcity cityB (Tun links)) || (firstcity cityB (Tun links) && lastcity cityA (Tun links))
 
 usesT :: Link -> Tunel -> Bool  -- indica si este tunel atraviesa ese link
-usesT link (Tun links) = link `elem` links 
+usesT link (Tun links) = link `elem` links
 
 delayT :: Tunel -> Float -- la demora que sufre una conexion en este tunel
 delayT (Tun links) = sum [ delayL link | link <- links]
