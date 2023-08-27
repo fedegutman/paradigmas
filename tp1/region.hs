@@ -47,14 +47,9 @@ linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan 
 linkedR (Reg _ links _) cityA cityB = not (null [link | link <- links, linksL cityA cityB link])
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
-delayR (Reg cities links tuneles) cityA cityB | connectedR (Reg cities links tuneles) cityA cityB = sum [delayT tunel | tunel <- tuneles, connectsT cityA cityB tunel]
+delayR (Reg cities links tuneles) cityA cityB | connectedR (Reg cities links tuneles) cityA cityB = head [delayT tunel | tunel <- tuneles, connectsT cityA cityB tunel]
                                               | otherwise = error "Las ciudades no están conectadas por un tunel."
-
---CHEQUEAR
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 availableCapacityForR (Reg cities links tuneles) cityA cityB | not (linkedR (Reg cities links tuneles) cityA cityB) = error "Las ciudades no están conectadas por un enlace."
-                                                             | otherwise = capacityL (head (filter (linksL cityA cityB) links))
-
---CHEQUEAR
-                  
+                                                             | otherwise = capacityL (head (filter (linksL cityA cityB) links))                  
