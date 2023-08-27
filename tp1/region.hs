@@ -1,5 +1,5 @@
 
-module Region (Region, newR, foundR, linkR, tunelR, connectedR, linkedR, delayR, availableCapacityForR)
+module Region (Region, newR, foundR, linkR, {-tunelR,-} connectedR, linkedR, delayR, availableCapacityForR)
    where
 
 import City
@@ -34,15 +34,18 @@ consecutiveCities (x:y:xs) = [x, y] : consecutiveCities (y:xs)
 
 -- link2ciudadeslist :: [City] -> Link -- pasa una lista de dos ciudades y crea el link entre ellas
 -- link2ciudadeslist [cityA, cityB] = newL cityA cityB _
-
-tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR reg cit links tunels [cities] = Reg cit links newT (map link2ciudadeslist (consecutiveCities [cities])):tunels
+{-
+tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
+tunelR (Reg cit links tunels) cities | (cityA `elem` cit) && (cityB `elem` cit)
+                                     | 
+                                     | Reg cit links newT (map link2ciudadeslist (consecutiveCities [cities])):tunels
+-}
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-connectedR reg [cit] [links] [tunnels] cityA cityB = connectsT cityA CityB tunnels
+connectedR (Reg _ _ tuneles) cityA cityB = not (null [tunel | tunel <- tuneles, connectsT cityA cityB tunel])
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
-linkedR reg cit link tunnels cityA cityB =  any linksL cityA cityB link
+linkedR (Reg _ links _) cityA cityB = not (null [link | link <- links, linksL cityA cityB link])
 
 encontarTunel :: Region -> City -> City -> Tunel
 encontarTunel reg [_] [link] [tunel] cityA cityB = head (filter (connectsT cityA cityB) tunel)
