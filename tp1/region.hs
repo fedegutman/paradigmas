@@ -32,7 +32,7 @@ tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciu
 tunelR reg cit links tunels [cities] = Reg cit links newT(map link2ciudadeslist (ciudadesConsecutivas [cities])):tunels
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-connectedR reg cit links tunnels cityA cityB = connectsT cityA CityB tunnels
+connectedR reg [cit] [links] [tunnels] cityA cityB = connectsT cityA CityB tunnels
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
 linkedR reg cit link tunnels cityA cityB =  any linksL cityA cityB link
