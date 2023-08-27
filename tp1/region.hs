@@ -1,4 +1,4 @@
-module Region (Region, newR, foundR, linkR, {-tunelR,-} connectedR, linkedR, delayR, availableCapacityForR)
+module Region (Region, newR, foundR, linkR, tunelR, connectedR, linkedR, delayR, availableCapacityForR)
    where
 
 import City
@@ -26,19 +26,22 @@ linkR (Reg cit links tuneles) cityA cityB quality | (cityA `elem` cit) && (cityB
 existingLink :: [Link] -> City -> City -> Bool
 existingLink links cityA cityB = not (null [link | link <- links, linksL cityA cityB link])
 
-consecutiveCities :: [a] -> [[a]]
+consecutiveCities :: [City] -> [[City]]
 consecutiveCities [] = []
 consecutiveCities [_] = []
 consecutiveCities (x:y:xs) = [x, y] : consecutiveCities (y:xs)
 
--- link2ciudadeslist :: [City] -> Link -- pasa una lista de dos ciudades y crea el link entre ellas
--- link2ciudadeslist [cityA, cityB] = newL cityA cityB _
-{-
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR (Reg cit links tuneles) cities | (cityA `elem` cit) && (cityB `elem` cit)
-                                     | 
-                                     | Reg cit links newT (map link2ciudadeslist (consecutiveCities [cities])):tuneles
--}
+tunelR (Reg cities links tuneles) citylist | not (null [city | city <- citylist, city `notElem` cities]) = error "Al menos una de las ciudades de la lista no se encuentra en la región."
+                                           | not (validLinks (Reg cities links tuneles) (consecutiveCities citylist)) = error "Hay enlances faltantes entre las ciudades."
+                                           | otherwise = Reg cities links (newT() :tuneles)
+                                             
+-- Reg cities links newT (map link2ciudadeslist (consecutiveCities [cities])):tuneles
+
+[city | city <- (consecutiveCities citylist), ]
+
+validLinks :: Region -> [[City]] -> Bool
+validLinks (Reg cities links tuneles) connections = not (null [citylist | citylist <- connections, existingLink links (head citylist) (last citylist) ])
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg _ _ tuneles) cityA cityB = not (null [tunel | tunel <- tuneles, connectsT cityA cityB tunel])
@@ -52,4 +55,4 @@ delayR (Reg cities links tuneles) cityA cityB | connectedR (Reg cities links tun
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 availableCapacityForR (Reg cities links tuneles) cityA cityB | not (linkedR (Reg cities links tuneles) cityA cityB) = error "Las ciudades no están conectadas por un enlace."
-                                                             | otherwise = capacityL (head (filter (linksL cityA cityB) links))                  
+                                                             | otherwise = capacityL (head (filter (linksL cityA cityB) links)) --terminar                  
