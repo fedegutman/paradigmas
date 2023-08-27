@@ -1,5 +1,5 @@
 
-module Region (Region, newR, foundR, linkR, tunelR, pathR, linksForR, connectedR, linkedR, delayR, availableCapacityForR, usedCapacityForR)
+module Region (Region, newR, foundR, linkR, tunelR, linksForR, connectedR, linkedR, delayR, availableCapacityForR)
    where
 
 import City
@@ -29,22 +29,25 @@ link2ciudadeslist :: [City] -> Link --pasa una lista de dos ciudades y crea el l
 link2ciudadeslist [cityA,cityB] = newL cityA cityB _   
 
 tunelR :: Region -> [ City ] -> Region -- genera una comunicación entre dos ciudades distintas de la región
-tunelR Reg cit links tunels [cities] = Reg cit links newT(map link2ciudadeslist (ciudadesConsecutivas [cities])):tunels
+tunelR reg cit links tunels [cities] = Reg cit links newT(map link2ciudadeslist (ciudadesConsecutivas [cities])):tunels
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
-connectedR (Reg cit link tunnels) cityA cityB = connectsT cityA CityB tunnels
+connectedR reg cit links tunnels cityA cityB = connectsT cityA CityB tunnels
 
 linkedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan enlazadas
-linkedR (Reg cit link tunnels) cityA cityB =  any (linksL cityA cityB) link
+linkedR reg cit link tunnels cityA cityB =  any linksL cityA cityB link
 
 encontarTunel :: Region -> City -> City -> Tunel
-encontarTunel Reg _ _ tunel cityA cityB = head (filter (connectsT cityA cityB) tunel)
+encontarTunel reg [_] [link] [tunel] cityA cityB = head (filter (connectsT cityA cityB) tunel)
 
 delayR :: Region -> City -> City -> Float -- dadas dos ciudades conectadas, indica la demora
-delayR Reg _ _ tunnels cityA cityB = delayT (encontarTunel Reg _ _ tunnels cityA cityB)  
+delayR reg _ _ tunnels cityA cityB = delayT (encontarTunel Reg _ _ tunnels cityA cityB)  
 
-encontarCapacitymasBaja :: Tunel -> Int
+encontarCapacitymasBaja :: Tunel -> Int      --NO SIRVE PARA NADA 
 encontarCapacitymasBaja tunel links = minimum (map capacityL links) 
 
+encontarLink :: Region -> City -> City -> Link
+encontarLink reg _ link _ cityA cityB = head (filter (linksL cityA cityB) link)
+
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
-availableCapacityForR reg _ _ tunel links = 
+availableCapacityForR reg _ link _ cityA cityB = capacityL (head (filter (linksL cityA cityB) link)) - 1
