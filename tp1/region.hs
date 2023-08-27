@@ -34,11 +34,15 @@ consecutiveCities (x:y:xs) = [x, y] : consecutiveCities (y:xs)
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg cities links tuneles) citylist | not (null [city | city <- citylist, city `notElem` cities]) = error "Al menos una de las ciudades de la lista no se encuentra en la región."
                                            | not (validLinks (Reg cities links tuneles) (consecutiveCities citylist)) = error "Hay enlances faltantes entre las ciudades."
-                                           | otherwise = Reg cities links (newT() :tuneles)
+                                           | otherwise = Reg cities links (newT (path (Reg cities links tuneles) (consecutiveCities citylist)) : tuneles)
                                              
 -- Reg cities links newT (map link2ciudadeslist (consecutiveCities [cities])):tuneles
 
-[city | city <- (consecutiveCities citylist), ]
+path :: Region -> [[City]] -> [Link]
+path (Reg cities links tuneles) connections = [findLink pair links | pair <- connections]
+
+findLink :: [City] -> [Link] -> Link
+findLink pair links = head [link | link <- links, linksL (head pair) (last pair) link]
 
 validLinks :: Region -> [[City]] -> Bool
 validLinks (Reg cities links tuneles) connections = not (null [citylist | citylist <- connections, existingLink links (head citylist) (last citylist) ])
