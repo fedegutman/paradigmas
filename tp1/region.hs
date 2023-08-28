@@ -15,7 +15,7 @@ foundR :: Region -> City -> Region -- agrega una nueva ciudad a la región
 foundR (Reg cities links tuneles) city | not (locationTaken cities city) = Reg (city : cities) links tuneles
                                        | otherwise = error "Ya hay una ciudad en esas coordenadas."
 
-locationTaken :: [City] -> City -> Bool
+locationTaken :: [City] -> City -> Bool -- indica si ya existe una ciudad con mismas coordenadas
 locationTaken citylist newcity = not (null ([city | city <- citylist, distanceC city newcity == 0]))
 
 linkR :: Region -> City -> City -> Quality -> Region -- enlaza dos ciudades de la región con un enlace de la calidad indicada
@@ -23,10 +23,10 @@ linkR (Reg cities links tuneles) cityA cityB quality | (cityA `notElem` cities) 
                                                      | existingLink links cityA cityB = error "Ya existe un enlace entre estas ciudades."
                                                      | otherwise = Reg cities (newL cityA cityB quality : links) tuneles
 
-existingLink :: [Link] -> City -> City -> Bool
+existingLink :: [Link] -> City -> City -> Bool -- indica si existe un link entre dos ciudades en una lista de links
 existingLink links cityA cityB = not (null [link | link <- links, linksL cityA cityB link])
 
-consecutiveCities :: [City] -> [[City]]
+consecutiveCities :: [City] -> [[City]] -- separa una lista de ciudades en pares [[A,B], [B,C], [C,D]...]
 consecutiveCities [] = []
 consecutiveCities [_] = []
 consecutiveCities (x:y:xs) = [x, y] : consecutiveCities (y:xs)
@@ -37,14 +37,14 @@ tunelR (Reg cities links tuneles) citylist | not (null [city | city <- citylist,
                                         -- | chequear capacidad de los links error "Al menos uno de los enlaces no tiene suficiente capacidad para el tunel." y ver si ya existe el tunel
                                            | otherwise = Reg cities links (newT (path (Reg cities links tuneles) (consecutiveCities citylist)) : tuneles)
                                           
-path :: Region -> [[City]] -> [Link]
+path :: Region -> [[City]] -> [Link] -- devuelve una lista con los links necesarios para unir los extremos del tunel
 path (Reg cities links tuneles) connections = [findLink pair links | pair <- connections]
 
-findLink :: [City] -> [Link] -> Link
+findLink :: [City] -> [Link] -> Link -- busca en una lista de enlaces el link que une un par de ciudades
 findLink pair links = head [link | link <- links, linksL (head pair) (last pair) link]
 
-validLinks :: Region -> [[City]] -> Bool
-validLinks (Reg cities links tuneles) connections = not (null [citylist | citylist <- connections, existingLink links (head citylist) (last citylist)])
+validLinks :: Region -> [[City]] -> Bool -- indica si existen links suficientes para conectar los pares de ciudades
+validLinks (Reg cities links tuneles) connections = length [pair | pair <- connections, existingLink links (head pair) (last pair)] == length connections
 
 connectedR :: Region -> City -> City -> Bool -- indica si estas dos ciudades estan conectadas por un tunel
 connectedR (Reg _ _ tuneles) cityA cityB = not (null [tunel | tunel <- tuneles, connectsT cityA cityB tunel])

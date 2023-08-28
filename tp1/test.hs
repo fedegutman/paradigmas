@@ -13,18 +13,19 @@ coordenadasGesell = newP 7 11
 coordenadasMdq = newP 7 14
 
 -----------------------------------------
--- City
+-- City --
 buenosAires = newC "Buenos Aires" coordenadasBsas
 pinamar = newC "Pinamar" coordenadasPinamar
 villaGesell = newC "Villa Gesell" coordenadasGesell
 marDelPlata = newC "Mar del Plata" coordenadasMdq
 
 buenosAiresFalsa = newC "Buenos Aires Falsa" coordenadasBsas -- ciudad en las mismas coordenadas que Buenos Aires
+ciudadSinNombre = newC "" coordenadasBsas -- Prueba de que no se puede crear una ciudad sin nombre
 
 distanciaBsasMdq = distanceC buenosAires marDelPlata
 
 -----------------------------------------
--- Quality
+-- Quality --
 quality1 = newQ "Bsas-Pinamar" 2 50
 quality2 = newQ "Pinamar-Gesell" 1 15
 quality3 = newQ "Gesell-Mdq" 3 30
@@ -32,7 +33,7 @@ quality3 = newQ "Gesell-Mdq" 3 30
 qualityError = newQ "conexión Falsa" (-2) 4
 
 -----------------------------------------
--- Link
+-- Link --
 bsasPinamar = newL buenosAires pinamar quality1
 pinamarGesell = newL pinamar villaGesell quality2
 gesellMdq = newL villaGesell marDelPlata quality3
@@ -46,7 +47,7 @@ linkVerdadero = linksL pinamar buenosAires bsasPinamar
 delayPinamarGesell = delayL pinamarGesell
 
 -----------------------------------------
--- Tunel
+-- Tunel --
 tunel = newT [bsasPinamar, pinamarGesell, gesellMdq]
 delaytunel = delayT tunel == (delayL bsasPinamar + delayL pinamarGesell + delayL gesellMdq)
 
@@ -56,7 +57,7 @@ puntasV = connectsT buenosAires marDelPlata tunel
 puntasF = connectsT pinamar marDelPlata tunel
 
 -----------------------------------------
--- Region
+-- Region --
 region = newR
 
 region1 = foundR region buenosAires
@@ -77,6 +78,6 @@ conexionvalida = connectedR region10 buenosAires marDelPlata
 
 enlaceValido = linkedR region10 pinamar villaGesell
 
-
+region13 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
 
 -----------------------------------------
