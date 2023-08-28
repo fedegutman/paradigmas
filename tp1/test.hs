@@ -6,7 +6,7 @@ import Tunel
 import Region
 
 -----------------------------------------
--- Point
+-- Point --
 coordenadasBsas = newP 5 2
 coordenadasPinamar = newP 6 8
 coordenadasGesell = newP 7 11
@@ -39,7 +39,7 @@ pinamarGesell = newL pinamar villaGesell quality2
 gesellMdq = newL villaGesell marDelPlata quality3
 
 enlaceFalso = connectsL villaGesell bsasPinamar
-enlaceVerdadera = connectsL villaGesell pinamarGesell
+enlaceVerdadero = connectsL villaGesell pinamarGesell
 
 linkFalso = linksL marDelPlata buenosAires bsasPinamar
 linkVerdadero = linksL pinamar buenosAires bsasPinamar
@@ -79,7 +79,14 @@ conexionvalida = connectedR region10 buenosAires marDelPlata
 
 enlaceValido = linkedR region10 pinamar villaGesell
 
-region14 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
+region13 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
 
 capacity = availableCapacityForR region10 pinamar villaGesell 
+
+capacityBeforeTunel = availableCapacityForR region9 pinamar villaGesell -- 1
+capacityAfterTunel = availableCapacityForR region10 pinamar villaGesell -- 0
+
+delayBsasMdq = delayR region10 buenosAires marDelPlata
+delayBsasMdqError = delayR region9 buenosAires marDelPlata -- Prueba de que no se puede calcular el delay entre ciudades si no hay un tunel que las conecte
+
 -----------------------------------------
