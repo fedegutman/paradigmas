@@ -34,9 +34,9 @@ consecutiveCities (x:y:xs) = [x, y] : consecutiveCities (y:xs)
 tunelR :: Region -> [City] -> Region -- genera una comunicación entre dos ciudades distintas de la región
 tunelR (Reg cities links tuneles) citylist | not (null [city | city <- citylist, city `notElem` cities]) = error "Al menos una de las ciudades de la lista no se encuentra en la región."
                                            | not (validLinks (Reg cities links tuneles) (consecutiveCities citylist)) = error "Hay enlances faltantes entre las ciudades."
-                                        -- | chequear capacidad de los links error "Al menos uno de los enlaces no tiene suficiente capacidad para el tunel." y ver si ya existe el tunel
+                                           | not (tunnelCapacity (Reg cities links tuneles) (consecutiveCities citylist)) = error "Alguno de los enlaces no soporta el tunel."
                                            | otherwise = Reg cities links (newT (path (Reg cities links tuneles) (consecutiveCities citylist)) : tuneles)
-                                          
+
 path :: Region -> [[City]] -> [Link] -- devuelve una lista con los links necesarios para unir los extremos del tunel
 path (Reg cities links tuneles) connections = [findLink pair links | pair <- connections]
 
@@ -58,4 +58,11 @@ delayR (Reg cities links tuneles) cityA cityB | connectedR (Reg cities links tun
 
 availableCapacityForR :: Region -> City -> City -> Int -- indica la capacidad disponible entre dos ciudades
 availableCapacityForR (Reg cities links tuneles) cityA cityB | not (linkedR (Reg cities links tuneles) cityA cityB) = error "Las ciudades no están conectadas por un enlace."
-                                                             | otherwise = capacityL (head (filter (linksL cityA cityB) links)) --terminar                  
+                                                             | connectedR (Reg cities links tuneles) cityA cityB = capacityL (findLink [cityA, cityB] links) - existingTunnels (Reg cities links tuneles) cityA cityB
+                                                             | otherwise = capacityL (findLink [cityA, cityB] links)
+
+existingTunnels :: Region -> City -> City -> Int -- indica cuantos tuneles existen entre dos ciudades
+existingTunnels (Reg _ _ tuneles) cityA cityB = length [tunel | tunel <- tuneles, connectsT cityA cityB tunel]
+
+tunnelCapacity :: Region -> [[City]] -> Bool -- indica si todas las ciudades de una lista soportan un tunel.
+tunnelCapacity (Reg cities links tuneles) citylist = not (null [pair | pair <- citylist, availableCapacityForR (Reg cities links tuneles) (head pair) (last pair) > 0])

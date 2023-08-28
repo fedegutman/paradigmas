@@ -73,11 +73,12 @@ region9 = linkR region8 villaGesell marDelPlata quality3
 
 region10 = tunelR region9 [buenosAires, pinamar, villaGesell, marDelPlata]
 region11 = tunelR region9 [pinamar, buenosAiresFalsa] -- Prueba que no se puede establecer un tunel cuando alguna ciudad no se encuentra en la region. 
+region12 = tunelR region10 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba de que no se puede crear un tunel si la calidad de alguno de los links no lo soporta.
 
 conexionvalida = connectedR region10 buenosAires marDelPlata
 
 enlaceValido = linkedR region10 pinamar villaGesell
 
-region13 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
+region14 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
 
 -----------------------------------------
