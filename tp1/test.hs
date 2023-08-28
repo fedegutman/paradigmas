@@ -81,4 +81,5 @@ enlaceValido = linkedR region10 pinamar villaGesell
 
 region14 = tunelR region8 [buenosAires, pinamar, villaGesell, marDelPlata] -- Prueba que no se puede establecer un tunel cuando falta alguno de los links
 
+capacity = availableCapacityForR region10 pinamar villaGesell 
 -----------------------------------------
