@@ -1,14 +1,18 @@
 package queue2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Queue {
 	
-	private int size;
-	private List<> people = new ArrayList<>();
+	private int length;
+	private List<Object> items = new ArrayList<>();
 
-}
 
-  public Queue(int length) {
-		this.size = length;
+
+  public Queue() {
+	this.length = 0;
+		
 	}
   
   public boolean isEmpty() {
