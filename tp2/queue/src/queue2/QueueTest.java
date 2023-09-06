@@ -1,4 +1,4 @@
-package queue;
+package queue2;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

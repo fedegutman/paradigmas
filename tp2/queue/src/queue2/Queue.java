@@ -1,10 +1,19 @@
-package queue;
+package queue2;
 
 public class Queue {
+	
+	private int size;
+	private List<> people = new ArrayList<>();
 
+}
+
+  public Queue(int length) {
+		this.size = length;
+	}
+  
   public boolean isEmpty() {
 		// TODO Auto-generated method stub
-		return true;
+		return length == 0;
 	}
 
 	public Queue add( Object  cargo ) {
