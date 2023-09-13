@@ -16,28 +16,31 @@ public class Queue {
 	}
   
   public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return length == 0;
+		
+		return items.size() == 0;
 	}
 
 	public Queue add( Object  cargo ) {
-		// TODO Auto-generated method stub
+		items.add(0, cargo);
 		return this;
 	}
 
 	public Object take() {
-    // TODO Auto-generated method stub
-		return null;
+        if (isEmpty()) {
+            throw new Error("Queue is empty");
+        }
+        return items.remove(0);
 	}
 
 	public Object head() {
-		// TODO Auto-generated method stub
-    return null;
-	}
+        if (isEmpty()) {
+            throw new Error("Queue is empty");
+        }
+        return items.get(0);
+    }
 
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+    return items.size();
 	}
 
 }
