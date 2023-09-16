@@ -18,8 +18,7 @@ public class Queue {
 
 	public Object take() {
 		if (!items.isEmpty()) {
-			Object elem = items.get(0);
-			return elem;
+			return items.remove(0);
 		} else {
 			throw new Error( "Queue is empty" );
 		}
@@ -27,8 +26,7 @@ public class Queue {
 
 	public Object head() {
 		if (!items.isEmpty()) {
-			Object elem = items.get(0);
-			return elem;
+			return items.get(0);
 		} else {
 			throw new Error( "Queue is empty" );
 		}
