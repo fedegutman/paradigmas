@@ -3,33 +3,24 @@ package queue;
 import java.util.ArrayList;
 
 public class Queue {
-	
-  private ArrayList<Object> items = new ArrayList<>();
 
+	private ArrayList<QueueStates> items = new ArrayList<>();
 
-  public boolean isEmpty() {
+	public boolean isEmpty() {
 		return items.isEmpty();
 	}
 
-	public Queue add( Object  cargo ) {
-		items.add(cargo);
+	public Queue add(Object cargo) {
+		items.add(new NotEmpty(cargo));
 		return this;
 	}
 
 	public Object take() {
-		if (!items.isEmpty()) {
-			return items.remove(0);
-		} else {
-			throw new Error( "Queue is empty" );
-		}
+		return items.remove(0);
 	}
 
 	public Object head() {
-		if (!items.isEmpty()) {
-			return items.get(0);
-		} else {
-			throw new Error( "Queue is empty" );
-		}
+		return items.get(0);
 	}
 
 	public int size() {
