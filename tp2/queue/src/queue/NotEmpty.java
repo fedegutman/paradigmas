@@ -17,11 +17,11 @@ public class NotEmpty extends QueueStates {
 	public Object head() {
 		return items.get(0);
 	}
-	
+
 	public boolean isEmpty() {
-		return items.isEmpty(); // transformar de empty a isempty
+		return items.isEmpty();
 	}
-	
+
 	public QueueStates add(Object cargo) {
 		items.add(cargo);
 		return this;

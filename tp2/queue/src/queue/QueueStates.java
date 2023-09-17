@@ -12,13 +12,13 @@ public abstract class QueueStates {
 		return new NotEmpty(cargo);
 	}
 
+	public abstract boolean isEmpty();
+	
 	public abstract Object take();
 
 	public abstract Object head();
 	
-	public abstract boolean isEmpty();
-
 	public abstract QueueStates add(Object cargo);
-	
+		
 	public abstract int size();
 }
