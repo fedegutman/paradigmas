@@ -5,10 +5,9 @@ import java.util.ArrayList;
 public class NotEmpty extends QueueStates {
 
 	private ArrayList<Object> items = new ArrayList<>();
-	private Object cargo;
 
 	public NotEmpty(Object cargo) {
-		this.cargo = cargo;
+		items.add(cargo);
 	}
 
 	public Object take() {
@@ -18,9 +17,18 @@ public class NotEmpty extends QueueStates {
 	public Object head() {
 		return items.get(0);
 	}
-
-	public Object content() {
-		return this.cargo;
+	
+	public boolean isEmpty() {
+		return items.isEmpty(); // transformar de empty a isempty
 	}
-}
+	
+	public QueueStates add(Object cargo) {
+		items.add(cargo);
+		return this;
+	}
+	
+	public int size() {
+		return items.size();
+	}
 
+}

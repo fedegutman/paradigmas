@@ -15,7 +15,10 @@ public abstract class QueueStates {
 	public abstract Object take();
 
 	public abstract Object head();
+	
+	public abstract boolean isEmpty();
 
-	public abstract Object content();
-
+	public abstract QueueStates add(Object cargo);
+	
+	public abstract int size();
 }

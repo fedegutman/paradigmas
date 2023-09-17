@@ -1,30 +1,32 @@
 package queue;
 
-import java.util.ArrayList;
-
 public class Queue {
 
-	private ArrayList<QueueStates> items = new ArrayList<>();
+	private QueueStates state = QueueStates.empty();
 
 	public boolean isEmpty() {
-		return items.isEmpty();
+		return state.isEmpty();
 	}
 
 	public Queue add(Object cargo) {
-		items.add(new NotEmpty(cargo));
+		state = state.add(cargo);
 		return this;
 	}
 
 	public Object take() {
-		return items.remove(0).content(); // problema aca // problema de pasar de notempty a empty
+		if (state.isEmpty()) {
+			return new Empty().take();
+		} else {
+			return state.take();
+		}
 	}
 
 	public Object head() {
-		return items.get(0).content(); // problema aca 
+		return state.head(); // problema aca
 	}
 
 	public int size() {
-		return items.size();
+		return state.size();
 	}
 
 }
