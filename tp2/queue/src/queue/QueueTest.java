@@ -71,20 +71,20 @@ public class QueueTest {
 	@Test
 	public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
 		Queue queue = new Queue();
-        assertThrows(Error.class, () -> queue.take(), EmptyQueue);
+        assertEquals(assertThrows(Error.class, () -> queue.take()).getMessage(), EmptyQueue);
 	}
 
 	@Test
 	public void test09CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
 		Queue queue = queueWithSomething();
 		queue.take();
-		assertThrows(Error.class, () -> queue.take(), EmptyQueue);
+        assertEquals(assertThrows(Error.class, () -> queue.take()).getMessage(), EmptyQueue);
 	}
 
 	@Test
 	public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
 		Queue queue = new Queue();
-		assertThrows(Error.class, () -> queue.head(), EmptyQueue);
+        assertEquals(assertThrows(Error.class, () -> queue.take()).getMessage(), EmptyQueue);
 	}
 
 	private Queue queueWithSomething() {
