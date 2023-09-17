@@ -84,7 +84,7 @@ public class QueueTest {
 	@Test
 	public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
 		Queue queue = new Queue();
-        assertEquals(assertThrows(Error.class, () -> queue.take()).getMessage(), EmptyQueue);
+        assertEquals(assertThrows(Error.class, () -> queue.head()).getMessage(), EmptyQueue);
 	}
 
 	private Queue queueWithSomething() {
