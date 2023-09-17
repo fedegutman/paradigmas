@@ -19,4 +19,8 @@ public class NotEmpty extends QueueStates {
 		return items.get(0);
 	}
 
+	public Object content() {
+		return this.cargo;
+	}
 }
+

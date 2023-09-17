@@ -16,11 +16,11 @@ public class Queue {
 	}
 
 	public Object take() {
-		return items.remove(0);
+		return items.remove(0).content(); // problema aca // problema de pasar de notempty a empty
 	}
 
 	public Object head() {
-		return items.get(0);
+		return items.get(0).content(); // problema aca 
 	}
 
 	public int size() {

@@ -16,4 +16,6 @@ public abstract class QueueStates {
 
 	public abstract Object head();
 
+	public abstract Object content();
+
 }

@@ -10,4 +10,9 @@ public class Empty extends QueueStates {
 		throw new Error("Queue is empty");
 	}
 
+	@Override
+	public Object content() {
+		throw new Error("Queue is empty");
+	}
+
 }
