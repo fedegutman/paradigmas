@@ -2,12 +2,13 @@ package queue;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 public class QueueTest {
 
+	private static String EmptyQueue = "Queue is empty";
 	private static String SecondItem = "Second";
 	private static String FirstItem = "First";
 	private static String something = "Something";
@@ -70,35 +71,20 @@ public class QueueTest {
 	@Test
 	public void test10CanNotTakeWhenThereAreNoObjectsInTheQueue() {
 		Queue queue = new Queue();
-		try {
-			queue.take();
-			fail("Expected Error was not thrown.");
-		} catch (Error e) {
-			assertTrue(e.getMessage().equals("Queue is empty"));
-		}
+        assertThrows(Error.class, () -> queue.take(), EmptyQueue);
 	}
 
 	@Test
 	public void test09CanNotTakeWhenThereAreNoObjectsInTheQueueAndTheQueueHadObjects() {
 		Queue queue = queueWithSomething();
 		queue.take();
-		try {
-			queue.take();
-			fail("Expected Error was not thrown.");
-		} catch (Error e) {
-			assertTrue(e.getMessage().equals("Queue is empty"));
-		}
+		assertThrows(Error.class, () -> queue.take(), EmptyQueue);
 	}
 
 	@Test
 	public void test10CanNotHeadWhenThereAreNoObjectsInTheQueue() {
 		Queue queue = new Queue();
-		try {
-			queue.head();
-			fail("Expected Error was not thrown.");
-		} catch (Error e) {
-			assertTrue(e.getMessage().equals("Queue is empty"));
-		}
+		assertThrows(Error.class, () -> queue.head(), EmptyQueue);
 	}
 
 	private Queue queueWithSomething() {

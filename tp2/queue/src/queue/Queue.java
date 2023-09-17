@@ -6,10 +6,10 @@ import java.util.List;
 public class Queue {
 
 	private QueueStates state = QueueStates.empty();
-    private List<QueueStates> statehistory = new ArrayList<>();
+    private List<QueueStates> stateHistory = new ArrayList<>();
     
     public Queue() {
-        statehistory.add(state);
+        stateHistory.add(state);
     }
 
 	public boolean isEmpty() {
@@ -18,14 +18,14 @@ public class Queue {
 
 	public Queue add(Object cargo) {
 		state = state.add(cargo);
-		statehistory.add(state);
+		stateHistory.add(state);
 		return this;
 	}
 
 	public Object take() {
 		Object item = state.take();
-		statehistory.remove(statehistory.size() - 1);
-		state = statehistory.get(statehistory.size() - 1);
+		stateHistory.remove(stateHistory.size() - 1);
+		state = stateHistory.get(stateHistory.size() - 1);
 		return item;
 	}
 
