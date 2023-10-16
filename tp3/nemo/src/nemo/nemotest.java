@@ -49,6 +49,15 @@ public class Nemotest {
 		assertEquals(robot.depth, 0);
 
 	}
+
+	@Test public void testNemoReceivesF() {
+		Nemo robot = new Nemo();
+		robot.takeStep('f');
+		assertEquals(robot.xcoordinate, 0);
+		assertEquals(robot.ycoordinate, 1);
+		assertEquals(robot.depth, 0);
+
+	}
 	
 	@Test public void test04NemoReceivesL() {
 		Nemo robot = new Nemo();
