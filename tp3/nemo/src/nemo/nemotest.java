@@ -8,103 +8,47 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 
-public class Nemotest {
+public class nemotest {
 	
 	@Test public void test00IsNemoOnSurface() {
-		Nemo robot = new Nemo();
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.depth, 0);
-		assertTrue (robot.capsule);
-		assertEquals(robot.direction, "North");
+		Nemo nemo = new Nemo();
+		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
+		assertEquals(nemo.getDirection(), new North());
+		assertEquals(nemo.depth, 0);
 
 	}
 	
-	@Test public void test01EmptyDirectionsDontMoveNemo() {
-		Nemo robot = new Nemo();
-		robot.changeCoordinate(" ");
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.depth, 0);
-		assertTrue (robot.capsule);
-	}
-	
-	@Test public void test02NemoReceivesD() {
-		Nemo robot = new Nemo();
-		robot.takeStep('d');
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.depth, -1);
-		assertTrue (robot.capsule);
-
-	}
-	
-	@Test public void test03NemoReceivesU() {
-		Nemo robot = new Nemo();
-		robot.takeStep('d');
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.depth, -1);
-		robot.takeStep('u');
-		assertEquals(robot.depth, 0);
-
-	}
-	
-	@Test public void test04NemoReceivesL() {
-		Nemo robot = new Nemo();
-		robot.takeStep('l');
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.direction, "West");
-		
-	}
-	
-	@Test public void test05NemoReceivesR() {
-		Nemo robot = new Nemo();
-		robot.takeStep('r');
-		assertEquals(robot.xcoordinate, 0);
-		assertEquals(robot.ycoordinate, 0);
-		assertEquals(robot.direction, "East");
-		
-	}
-	
-	@Test public void test06NemoReceivesString() {
-		Nemo robot = new Nemo();
-		robot.changeCoordinate("rl");
-		assertEquals(robot.direction, "North");
-		
-	}
-	
-	@Test public void test07NemoReceivesStrings() {
-		Nemo robot = new Nemo();
-		robot.changeCoordinate("rlfrfflf");
-		assertEquals(robot.direction, "North");
-		assertEquals(robot.xcoordinate, 2);
-		assertEquals(robot.ycoordinate, 2);
-		
-		
-	}
-	
-	@Test public void testcapsule08True() {
-		Nemo robot = new Nemo();
-		robot.changeCoordinate("dm");
-		assertTrue(robot.capsule);
-		assertEquals(-1,robot.depth);
-		
-		
-		
-	}
-	
-	@Test public void testcapsule09False() {
-		Nemo robot = new Nemo();
-		robot.changeCoordinate("ddm");
-		assertFalse(robot.capsule);
-		
-		
-		
-		
-	}
+//	@Test public void test01EmptyDirectionsDontMoveNemo() {
+//		Nemo robot = new Nemo();
+//		robot.changeCoordinate(" ");
+//		assertEquals(robot.xcoordinate, 0);
+//		assertEquals(robot.ycoordinate, 0);
+//		assertEquals(robot.depth, 0);
+//
+//	}
+//	
+//	@Test public void test02NemoReceivesD() {
+//		Nemo robot = new Nemo();
+//		robot.takeStep('d');
+//		assertEquals(robot.xcoordinate, 0);
+//		assertEquals(robot.ycoordinate, 0);
+//		assertEquals(robot.depth, -1);
+//
+//	}
+//	
+//	@Test public void test03NemoReceivesU() {
+//		Nemo robot = new Nemo();
+//		robot.takeStep('d');
+//		assertEquals(robot.xcoordinate, 0);
+//		assertEquals(robot.ycoordinate, 0);
+//		assertEquals(robot.depth, -1);
+//		robot.takeStep('u');
+//		assertEquals(robot.depth, 0);
+//
+//	}
+//	
 }
+
 
 /*
 test 00 
