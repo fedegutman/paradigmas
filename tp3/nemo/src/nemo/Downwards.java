@@ -1,21 +1,18 @@
 package nemo;
 
 
-public class Left extends Commando {
+public class Downwards extends Commando {
 	
-	public Character character = 'l' ;
+	public Character character = 'd' ;
 
 	@Override
 	public Nemo execute(Nemo nemo) {
-		nemo.turnLeft() ;
+		nemo.add(nemo) ;
 		return nemo ;
 	}
-
+	
 	@Override
 	public boolean validCharacter(Character c) {
-	return character == c;
-		}
-	
-	
+		return character == c;
+	}
 }
-

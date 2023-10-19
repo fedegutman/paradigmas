@@ -10,4 +10,9 @@ public class Right extends Commando {
 		nemo.turnRight();
 		return nemo ;
 	}
+
+	@Override
+	public boolean validCharacter(Character c) {
+		return character == c;
+	}
 }

@@ -1,6 +1,11 @@
 package nemo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
+
+
+
 
 //import java.util.List;
 //import java.util.ArrayList;
@@ -11,15 +16,18 @@ public class Nemo {
 	public Direction direction;
 	public int depth;
 	public ArrayList<Commando> commands;
-
+	public ArrayList<DepthStates> depthHistory ;
+	private DepthStates state = DepthStates.superficie() ;
 
 
 	public Nemo() {
 		depth = 0;
 		coordinates = new Coordinates(0,0);
 		direction = new North();
+		commands = new ArrayList<>(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(),new Downwards()));
+	}
 
-			};
+			;
 
 	public Nemo changeCoordinate(String direction) {
 		if (direction == "") {
@@ -41,7 +49,7 @@ public class Nemo {
 		direction=direction.turnLeft() ;
 		return this ;
 	}
-	
+
 	public Nemo turnRight() {
 		direction=direction.turnRight();
 		return this ;
@@ -52,10 +60,44 @@ public class Nemo {
 		return this;
 	}
 	
-	public Nemo executeCommando (Character character) {  //no se si esta bien
-		    commands.forEach(command -> command.execute(this));
-		    return this;
+	public Nemo executeCommando(Character commandChar) {
+		Commando actualCommando = commands.stream().filter(c -> c.validCharacter(commandChar));		
+		return actualCommando.execute(this);
+	}
+	
+	public Nemo move(String commandString) {
+		for (char comando : commandString.toCharArray()) {
+			this.executeCommando(comando);
 		}
+		return this;
+	}
+	public Nemo releaseCapsule() {
+		state = depthHistory.get(depthHistory.size() - 1);
+		state.releaseCapsule();
+		return this;
+		
+	}
+	
+	public Nemo add (Object cargo) {
+		state = state.add(cargo);
+		depthHistory.add(state);
+		return this;
+	}
+	
+	public int profundidad () {
+		return depth = state.size();
+	}
+	
+	public Object take() {
+		Object item = state.take();
+		depthHistory.remove(depthHistory.size() - 1);
+		state = depthHistory.get(depthHistory.size() - 1);
+		return item;
+	}
+	
+
+
+
 	
 //	public Nemo takeStep(char step) {
 ////		if (step.) {

@@ -16,7 +16,21 @@ public class Nemotest {
 		assertEquals(nemo.getDirection(), new North());
 		assertEquals(nemo.depth, 0);
 
-	}}
+	}
+	
+	@Test public void test02nemoRecivesU() {
+		Nemo nemo = new Nemo();
+		nemo.executeCommando('d');
+		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
+		assertEquals(nemo.getDirection(), new North());
+		assertEquals(nemo.profundidad(),1);
+		assertEquals(nemo.depth, 1);
+
+	}
+	
+}
+
+
 	
 //	@Test public void test01EmptyDirectionsDontMoveNemo() {
 //		Nemo robot = new Nemo();
