@@ -21,7 +21,7 @@ public abstract class DepthStates {
 	
 	public abstract DepthStates add (Object cargo);
 	
-	public abstract boolean releaseCapsule () ;
+	public abstract Object releaseCapsule () ;
 	
 	public abstract int size();
 

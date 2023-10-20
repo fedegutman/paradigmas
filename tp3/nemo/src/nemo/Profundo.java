@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Profundo extends DepthStates {
 
+	private static final String Explosion = "Submarine Explsion";
 	private ArrayList<Object> items = new ArrayList<>();
 
 	public Profundo(Object cargo) {
@@ -23,9 +24,8 @@ public class Profundo extends DepthStates {
 	}
 
 	@Override
-	public boolean releaseCapsule() {
-		return false;
-	}
+	public Object releaseCapsule() {
+		throw new Error(Explosion);	}
 
 	@Override
 	public int size() {

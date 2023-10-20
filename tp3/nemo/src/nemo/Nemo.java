@@ -7,6 +7,7 @@ import java.util.Optional;
 
 
 
+
 //import java.util.List;
 //import java.util.ArrayList;
 
@@ -14,17 +15,17 @@ public class Nemo {
 
 	public Coordinates coordinates;
 	public Direction direction;
-	public int depth;
 	public ArrayList<Commando> commands;
-	public ArrayList<DepthStates> depthHistory ;
+	private ArrayList<DepthStates> depthHistory ;
 	private DepthStates state = DepthStates.superficie() ;
 
 
 	public Nemo() {
-		depth = 0;
+		
 		coordinates = new Coordinates(0,0);
 		direction = new North();
 		commands = new ArrayList<>(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(),new Downwards()));
+		depthHistory = new ArrayList<>(Arrays.asList(state));
 	}
 
 			;
@@ -61,20 +62,17 @@ public class Nemo {
 	}
 	
 	public Nemo executeCommando(Character commandChar) {
-		Commando actualCommando = commands.stream().filter(c -> c.validCharacter(commandChar));		
+		Commando actualCommando = commands.stream().filter(c -> c.validCharacter(commandChar)).findFirst().orElse(null);		
 		return actualCommando.execute(this);
 	}
 	
 	public Nemo move(String commandString) {
-		for (char comando : commandString.toCharArray()) {
-			this.executeCommando(comando);
-		}
-		return this;
+	    commandString.chars().forEach(c -> executeCommando((char) c));
+	    return this;
 	}
-	public Nemo releaseCapsule() {
-		state = depthHistory.get(depthHistory.size() - 1);
-		state.releaseCapsule();
-		return this;
+	
+	public Object releaseCapsule() {
+		return null;
 		
 	}
 	
@@ -85,7 +83,7 @@ public class Nemo {
 	}
 	
 	public int profundidad () {
-		return depth = state.size();
+		return -state.size();
 	}
 	
 	public Object take() {

@@ -22,8 +22,8 @@ public class NivelUno extends DepthStates {
 	}
 
 	@Override
-	public boolean releaseCapsule() {
-		return true;
+	public Object releaseCapsule() {
+		return null;
 	}
 
 	@Override
