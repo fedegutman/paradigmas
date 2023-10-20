@@ -24,7 +24,7 @@ public class Nemo {
 		
 		coordinates = new Coordinates(0,0);
 		direction = new North();
-		commands = new ArrayList<>(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(),new Downwards()));
+		commands = new ArrayList<>(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(),new Downwards(),new Capsula()));
 		depthHistory = new ArrayList<>(Arrays.asList(state));
 	}
 
@@ -72,7 +72,8 @@ public class Nemo {
 	}
 	
 	public Object releaseCapsule() {
-		return null;
+		state.releaseCapsule();
+		return this;
 		
 	}
 	
@@ -92,27 +93,6 @@ public class Nemo {
 		state = depthHistory.get(depthHistory.size() - 1);
 		return item;
 	}
-	
 
-
-
-	
-//	public Nemo takeStep(char step) {
-////		if (step.) {
-////			return this;
-////		}
-//			if (step == 'd') {
-//				this.depth -= 1;
-//				return this;
-//			}
-//			else if (step == 'u') {
-//				// si depth es 0 no puedo subir mas
-//				this.depth += 1;
-//				return this;
-//		}
-//			
-//		return null;
-//
-//	}
 
 };

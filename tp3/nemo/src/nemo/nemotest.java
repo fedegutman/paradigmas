@@ -9,10 +9,11 @@ import org.junit.jupiter.api.Test;
 
 
 public class Nemotest {
+	private static final String Explosion = "Submarine Explosion";
+
 	
 	@Test public void test00IsNemoOnSurface() {
 		Nemo nemo = new Nemo();
-		nemo.releaseCapsule();
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
 		assertEquals(nemo.profundidad(), 0);
@@ -24,6 +25,8 @@ public class Nemotest {
 		nemo.move("");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
+		assertEquals(nemo.profundidad(), 0);
+
 		
 
 	}
@@ -33,6 +36,8 @@ public class Nemotest {
 		nemo.move("r");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new East());
+		assertEquals(nemo.profundidad(), 0);
+
 		
 
 	}
@@ -42,6 +47,8 @@ public class Nemotest {
 		nemo.move("l");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new West());
+		assertEquals(nemo.profundidad(), 0);
+
 		
 
 	}
@@ -51,6 +58,8 @@ public class Nemotest {
 		nemo.move("ll");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new South());
+		assertEquals(nemo.profundidad(), 0);
+
 		
 
 	}
@@ -78,13 +87,7 @@ public class Nemotest {
 	
 	@Test public void test08nemoRecivesDDandCapsuleIsFalse() {
 		Nemo nemo = new Nemo();
-		nemo.move("dd");
-		nemo.releaseCapsule();
-		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
-		assertEquals(nemo.getDirection(), new North());
-		assertEquals(nemo.profundidad(),-2);
-
-		
+        assertEquals(assertThrows(Error.class, () -> nemo.move("ddm")).getMessage(), Explosion);
 
 	}
 	
@@ -94,9 +97,7 @@ public class Nemotest {
 		nemo.move("dllfrrfflrddu");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,1));
 		assertEquals(nemo.getDirection(), new North());
-		assertEquals(nemo.profundidad(),-2);
-
-		
+		assertEquals(nemo.profundidad(),-2);	
 
 	}
 }

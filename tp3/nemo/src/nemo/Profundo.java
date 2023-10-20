@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Profundo extends DepthStates {
 
-	private static final String Explosion = "Submarine Explsion";
+	private static final String Explosion = "Submarine Explosion";
+	
 	private ArrayList<Object> items = new ArrayList<>();
 
 	public Profundo(Object cargo) {
