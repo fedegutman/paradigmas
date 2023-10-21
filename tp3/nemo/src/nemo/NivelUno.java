@@ -1,14 +1,8 @@
 package nemo;
 
-import java.util.ArrayList;
-
 public class NivelUno extends DepthStates {
-	
-	private ArrayList<Object> items = new ArrayList<>();
-	
-	
+		
 	public NivelUno(Object cargo) {
-		items.add(cargo);
 	}
 	
 	@Override
@@ -28,7 +22,7 @@ public class NivelUno extends DepthStates {
 
 	@Override
 	public int size() {
-		return items.size();
+		return 1;
 	}
 
 }
