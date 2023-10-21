@@ -4,16 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-//import java.util.List;
-//import java.util.ArrayList;
 
 public class Nemo {
 
 	public Coordinates coordinates;
 	public Direction direction;
 	public ArrayList<Commando> commands;
-	private ArrayList<DepthStates> depthHistory ;
-	private DepthStates state = DepthStates.superficie() ;
+	public ArrayList<DepthStates> depthHistory ;
+	public DepthStates state = DepthStates.superficie() ;
 
 
 	public Nemo(Coordinates initialPosition, Direction initialDirection) {
@@ -75,10 +73,10 @@ public class Nemo {
 	}
 	
 	public Object take() {
-		Object item = state.take();
+		state.take();
 		depthHistory.remove(depthHistory.size() - 1);
 		state = depthHistory.get(depthHistory.size() - 1);
-		return item;
+		return this;
 	}
 
 
