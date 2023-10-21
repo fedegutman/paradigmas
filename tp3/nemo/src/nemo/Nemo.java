@@ -49,12 +49,12 @@ public class Nemo {
 	}
 	
 	public Nemo executeCommando(Character commandChar) {
-		Commando actualCommando = commands.stream().filter(c -> c.validCharacter(commandChar)).findFirst().orElse(null);		
+		Commando actualCommando = commands.stream().filter(x -> x.validCharacter(commandChar)).findFirst().orElse(null);		
 		return actualCommando.execute(this);
 	}
 	
 	public Nemo move(String commandString) {
-	    commandString.chars().forEach(c -> executeCommando((char) c));
+	    commandString.chars().forEach(x -> executeCommando((char) x));
 	    return this;
 	}
 	
