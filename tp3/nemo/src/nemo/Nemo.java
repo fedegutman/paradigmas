@@ -24,7 +24,6 @@ public class Nemo {
 		depthHistory = new ArrayList<>(Arrays.asList(state));
 	}
 
-
 	
 	public Coordinates getCoordinates() {
 		return coordinates;
