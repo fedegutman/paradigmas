@@ -9,6 +9,7 @@ public class Profundo extends DepthStates {
 	private ArrayList<Object> items = new ArrayList<>();
 
 	public Profundo(Object cargo) {
+		items.add(new NivelUno(cargo));
 		items.add(cargo);
 	}
 	
@@ -30,7 +31,8 @@ public class Profundo extends DepthStates {
 
 	@Override
 	public int size() {
-		return items.size() +1 ;
+		return items.size() ;
 	}
 
 }
+
