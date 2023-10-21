@@ -24,15 +24,7 @@ public class Nemo {
 		depthHistory = new ArrayList<>(Arrays.asList(state));
 	}
 
-			;
 
-	public Nemo changeCoordinate(String direction) {
-		if (direction == "") {
-			return this;
-		}
-		return null;
-
-	}
 	
 	public Coordinates getCoordinates() {
 		return coordinates;
