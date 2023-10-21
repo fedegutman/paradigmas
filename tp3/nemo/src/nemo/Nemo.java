@@ -2,10 +2,6 @@ package nemo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Optional;
-
-
-
 
 
 //import java.util.List;
@@ -20,10 +16,10 @@ public class Nemo {
 	private DepthStates state = DepthStates.superficie() ;
 
 
-	public Nemo() {
+	public Nemo(Coordinates initialPosition, Direction initialDirection) {
 		
-		coordinates = new Coordinates(0,0);
-		direction = new North();
+		coordinates = initialPosition ;
+		direction = initialDirection ;
 		commands = new ArrayList<>(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(),new Downwards(),new Capsula()));
 		depthHistory = new ArrayList<>(Arrays.asList(state));
 	}

@@ -13,7 +13,7 @@ public class Nemotest {
 
 	
 	@Test public void test00IsNemoOnSurface() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North() );
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
 		assertEquals(nemo.profundidad(), 0);
@@ -21,7 +21,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test02nemoRecivesNothing() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
@@ -32,7 +32,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test03nemoRecivesR() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("r");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new East());
@@ -43,7 +43,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test04nemoRecivesl() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("l");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new West());
@@ -54,7 +54,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test05nemoRecivesLL() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("ll");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new South());
@@ -65,7 +65,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test06nemoRecivesD() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("d");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
@@ -75,7 +75,7 @@ public class Nemotest {
 	}
 	
 	@Test public void test07nemoRecivesU() {
-		Nemo nemo = new Nemo();
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		nemo.move("du");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,0));
 		assertEquals(nemo.getDirection(), new North());
@@ -85,21 +85,28 @@ public class Nemotest {
 
 	}
 	
-	@Test public void test08nemoRecivesDDandCapsuleIsFalse() {
-		Nemo nemo = new Nemo();
+	@Test public void test08nemoReleaseCapsuleAndExplodes() {
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
         assertEquals(assertThrows(Error.class, () -> nemo.move("ddm")).getMessage(), Explosion);
 
 	}
 	
 	
 	@Test public void test09nemoRecivesLargeString() {
-		Nemo nemo = new Nemo();
-		nemo.move("dllfrrfflrddu");
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
+		nemo.move("dllfrrfmflrddu");
 		assertEquals(nemo.getCoordinates(), new Coordinates(0,1));
 		assertEquals(nemo.getDirection(), new North());
 		assertEquals(nemo.profundidad(),-2);	
 
 	}
+	
+	@Test public void test09nemoRecivesLargeStringAndExplodes() {
+		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
+        assertEquals(assertThrows(Error.class, () -> nemo.move("dllfrrfflrddum")).getMessage(), Explosion);
+
+	}
+
 }
 
 
