@@ -11,7 +11,7 @@ public class NemoTest {
 	
 	@Test public void test00NemoOnSurface() {
 		comparePositions(new Coordinates(0,0), new North(), 0, new Nemo(new Coordinates (0,0), new North() ));
-	}
+	} 
 
 	@Test public void test01NemoReceivesNothing() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
