@@ -9,7 +9,7 @@ public class Surface extends DepthStates {
 
 	@Override
 	public DepthStates add(Object depthlevel) {
-		return nivelUno();
+		return new FirstImmersion(depthlevel);
 	}
 
 	@Override

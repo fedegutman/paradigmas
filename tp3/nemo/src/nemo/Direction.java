@@ -3,7 +3,9 @@ package nemo;
 public abstract class Direction {
 	
 	public abstract Direction turnLeft();
+	
 	public abstract Direction turnRight();
+	
 	public abstract Coordinates moveFoward();
 	
     @Override

@@ -17,4 +17,3 @@ public class South extends Direction {
 		return new Coordinates (0,-1);
 	}
 }
-

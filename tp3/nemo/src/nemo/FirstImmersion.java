@@ -23,5 +23,4 @@ public class FirstImmersion extends DepthStates {
 	public int size() {
 		return 1;
 	}
-
 }

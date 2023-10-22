@@ -42,7 +42,7 @@ public class Nemo {
 	}
 	
 	public Nemo runCommand(Character charCommand) {
-		Commands command = commands.stream().filter(c -> c.validCharacter(charCommand)).findFirst().orElse(null);		
+		Commands command = commands.stream().filter(c -> c.getChar() == charCommand).findFirst().orElse(null);
 		return command.execute(this);
 	}
 	
