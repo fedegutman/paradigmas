@@ -7,14 +7,12 @@ public class Nemo {
 
 	public Coordinates coordinates;
 	public Direction direction;
-	public ArrayList<Commands> commands = new ArrayList<>();
 	public ArrayList<DepthStates> depthHistory = new ArrayList<>();
 	public DepthStates state = DepthStates.superficie();
 
 	public Nemo(Coordinates initialPosition, Direction initialDirection) {
 		coordinates = initialPosition ;
 		direction = initialDirection ;
-		commands.addAll(Arrays.asList(new Left(), new Right(), new Forward(), new Upwards(), new Downwards(), new Capsule()));
 		depthHistory.addAll(Arrays.asList(state));
 	}
 	
@@ -42,7 +40,7 @@ public class Nemo {
 	}
 	
 	public Nemo runCommand(Character charCommand) {
-		Commands command = commands.stream().filter(c -> c.getChar() == charCommand).findFirst().orElse(null);
+		Commands command = Commands.getCommand(charCommand);
 		return command.execute(this);
 	}
 	

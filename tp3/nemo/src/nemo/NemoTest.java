@@ -102,6 +102,7 @@ public class NemoTest {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
 		comparePositions(new Coordinates(0,0), new North(), -8, nemo.move("dddddddddduuud"));	
 	}
+	
 		
 	private void comparePositions(Coordinates coordinates, Direction direction, int depth, Nemo nemo) {
 		assertEquals(nemo.getCoordinates(), coordinates);
