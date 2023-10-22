@@ -1,13 +1,12 @@
 package nemo;
 
-
-public class Forward extends Commando {
+public class Forward extends Commands {
 	
 	public Character character = 'f' ;
 
 	@Override
 	public Nemo execute(Nemo nemo) {
-		nemo.forward () ;
+		nemo.goForward () ;
 		return nemo ;
 	}
 

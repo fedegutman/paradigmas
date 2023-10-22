@@ -1,7 +1,6 @@
 package nemo;
 
-
-public class Left extends Commando {
+public class Left extends Commands {
 	
 	public Character character = 'l' ;
 
@@ -13,9 +12,7 @@ public class Left extends Commando {
 
 	@Override
 	public boolean validCharacter(Character c) {
-	return character == c;
-		}
-	
-	
+		return character == c;
+	}
 }
 

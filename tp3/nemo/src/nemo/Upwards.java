@@ -1,7 +1,6 @@
 package nemo;
 
-
-public class Upwards extends Commando {
+public class Upwards extends Commands {
 	
 	public Character character = 'u' ;
 

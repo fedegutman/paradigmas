@@ -2,10 +2,7 @@ package nemo;
 
 import java.util.Objects;
 
-// metodo get coordinates de quien es responsabilidad
-
 public class Coordinates {
-	
 	private int x;
 	private int y;
 	
@@ -18,7 +15,6 @@ public class Coordinates {
 		x += coordinate.x;
 		y += coordinate.y;
 		return this;
-
 	}
 
 	@Override

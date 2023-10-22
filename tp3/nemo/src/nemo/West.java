@@ -2,9 +2,6 @@ package nemo;
 
 public class West extends Direction {
 	
-	public West() {
-	}
-
 	@Override
 	public Direction turnLeft() {
 		return new South();
@@ -19,5 +16,4 @@ public class West extends Direction {
 	public Coordinates moveFoward() {
 		return new Coordinates (-1,0);
 	}
-
 }

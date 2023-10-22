@@ -2,28 +2,26 @@ package nemo;
 
 public abstract class DepthStates {
 	
-	private static Object cargo;
-
+	private static Object depthlevel;
 
 	public static DepthStates superficie() {
-		return new Superficie ();
+		return new Surface();
 	}
 	
 	public static DepthStates nivelUno() {
-		return new NivelUno (cargo);
+		return new FirstImmersion(depthlevel);
 	}
 	
 	public static DepthStates profundo() {
-		return new Profundo (cargo);
+		return new Profundity(depthlevel);
 	}
 	
-	public abstract Object take ();
+	public abstract Object take();
 	
-	public abstract DepthStates add (Object cargo);
+	public abstract DepthStates add(Object cargo);
 	
-	public abstract Object releaseCapsule () ;
+	public abstract Object releaseCapsule() ;
 	
 	public abstract int size();
-
 
 }

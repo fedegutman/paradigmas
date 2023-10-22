@@ -2,15 +2,15 @@ package nemo;
 
 import java.util.ArrayList;
 
-public class Profundo extends DepthStates {
+public class Profundity extends DepthStates {
 
-	private static final String Explosion = "Submarine Explosion";
+	private static String Explosion = "Submarine Explosion";
 	
 	private ArrayList<Object> items = new ArrayList<>();
 
-	public Profundo(Object cargo) {
-		items.add(new NivelUno(cargo));
-		items.add(cargo);
+	public Profundity(Object depthlevel) {
+		items.add(new FirstImmersion(depthlevel));
+		items.add(depthlevel);
 	}
 	
 	@Override
@@ -18,10 +18,9 @@ public class Profundo extends DepthStates {
 		return items.remove(0);
 	}
 
-
 	@Override
-	public DepthStates add(Object cargo) {
-		items.add(cargo);
+	public DepthStates add(Object depthlevel) {
+		items.add(depthlevel);
 		return this;
 	}
 
@@ -33,5 +32,4 @@ public class Profundo extends DepthStates {
 	public int size() {
 		return items.size() ;
 	}
-
 }

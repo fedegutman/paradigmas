@@ -1,6 +1,6 @@
 package nemo;
 
-public class Capsula extends Commando {
+public class Capsule extends Commands {
 	
 	public Character character = 'm' ;
 	
@@ -13,6 +13,5 @@ public class Capsula extends Commando {
 	@Override
 	public boolean validCharacter(Character c) {
 		return character == c;
-}
-
+	}
 }

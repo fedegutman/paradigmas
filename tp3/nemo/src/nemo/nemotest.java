@@ -7,127 +7,109 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 
-public class Nemotest {
+public class NemoTest {
 	private static final String Explosion = "Submarine Explosion";
 
 	
 	@Test public void test00NemoOnSurface() {
-		comparePositions(new Coordinates(0,0),new North(),0,new Nemo(new Coordinates (0,0), new North() ));
+		comparePositions(new Coordinates(0,0), new North(), 0, new Nemo(new Coordinates (0,0), new North() ));
 	}
 
-	@Test public void test01nemoRecivesNothing() {
+	@Test public void test01NemoReceivesNothing() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("");
-		comparePositions(new Coordinates(0,0),new North(),0,nemo);
+		comparePositions(new Coordinates(0,0), new North(), 0, nemo.move(""));
 	}
 	
-	@Test public void test02nemoRecivesF() {
+	@Test public void test02NemoReceivesF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("f");
-		comparePositions(new Coordinates(0,1),new North(),0,nemo);
+		comparePositions(new Coordinates(0,1), new North(), 0, nemo.move("f"));
 	}
 	
-	@Test public void test03nemoRecivesRF() {
+	@Test public void test03NemoReceivesRF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("rf");
-		comparePositions(new Coordinates(1,0),new East(),0,nemo);
+		comparePositions(new Coordinates(1,0), new East(), 0, nemo.move("rf"));
 	}
 	
-	@Test public void test04nemoRecivesRRF() {
+	@Test public void test04NemoReceivesRRF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("rrf");
-		comparePositions(new Coordinates(0,-1),new South(),0,nemo);
+		comparePositions(new Coordinates(0,-1), new South(), 0, nemo.move("rrf"));
 	}
 	
-	@Test public void test05nemoRecivesRRRF() {
+	@Test public void test05NemoReceivesRRRF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("rrrf");
-		comparePositions(new Coordinates(-1,0),new West(),0,nemo);
+		comparePositions(new Coordinates(-1,0), new West(), 0, nemo.move("rrrf"));
 	}
 	
-	@Test public void test06nemoRecivesRRRRF() {
+	@Test public void test06NemoReceivesRRRRF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("rrrrf");
-		comparePositions(new Coordinates(0,1),new North(),0,nemo);
+		comparePositions(new Coordinates(0,1), new North(), 0, nemo.move("rrrrf"));
 	}
 	
-	@Test public void test07nemoRecivesLF() {
+	@Test public void test07NemoReceivesLF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("lf");
-		comparePositions(new Coordinates(-1,0),new West(),0,nemo);
+		comparePositions(new Coordinates(-1,0), new West(), 0, nemo.move("lf"));
 	}
 	
-	@Test public void test08nemoRecivesLLF() {
+	@Test public void test08NemoReceivesLLF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("llf");
-		comparePositions(new Coordinates(0,-1),new South(),0,nemo);	
+		comparePositions(new Coordinates(0,-1), new South(), 0, nemo.move("llf"));	
 	}
 	
-	@Test public void test09nemoRecivesLLLF() {
+	@Test public void test09NemoReceivesLLLF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("lllf");
-		comparePositions(new Coordinates(1,0),new East(),0,nemo);
+		comparePositions(new Coordinates(1,0), new East(), 0, nemo.move("lllf"));
 	}
 	
-	@Test public void test10nemoRecivesLLLLF() {
+	@Test public void test10NemoReceivesLLLLF() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("llllf");
-		comparePositions(new Coordinates(0,1),new North(),0,nemo);	
+		comparePositions(new Coordinates(0,1), new North(), 0, nemo.move("llllf"));	
 	}
 	
-	
-	@Test public void test11nemoRecivesD() {
+	@Test public void test11NemoReceivesD() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("d");
-		comparePositions(new Coordinates(0,0),new North(),-1,nemo);
+		comparePositions(new Coordinates(0,0), new North(), -1, nemo.move("d"));
 	}
 	
-	@Test public void test12nemoRecivesU() {
+	@Test public void test12NemoReceivesDU() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("du");
-		comparePositions(new Coordinates(0,0),new North(),0,nemo);
+		comparePositions(new Coordinates(0,0), new North(), 0, nemo.move("du"));
 	}
 	
-	@Test public void test13nemoReleaseCapsuleAndExplodes() {
+	@Test public void test13NemoReleasesCapsuleAndExplodes() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		assertThrowsLike(() -> nemo.move("ddm"),nemo);
+		assertThrowsLike(() -> nemo.move("ddm"), Explosion);
 	}
 	
-	@Test public void test14nemoRecivesLargeString() {
+	@Test public void test14NemoReceivesLargeString() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("dllfrrfmflrddufffffldlrffddrldlfdlrrf");
-		comparePositions(new Coordinates(-3,5),new West(),-7,nemo);	
+		comparePositions(new Coordinates(-3,5), new West(), -7, nemo.move("dllfrrfmflrddufffffldlrffddrldlfdlrrf"));	
 	}
 	
-	@Test public void test15nemoRecivesLargeStringAndExplodes() {
+	@Test public void test15NemoReceivesLargeStringAndExplodes() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-        assertThrowsLike(() -> nemo.move("dllfrrfflrddum"),nemo);
+        assertThrowsLike(() -> nemo.move("dllfrrfflrddum"), Explosion);
 	}
 
-	@Test public void test16nemoGoesDeepAndComesBackAndReleaseCapsule() {
+	@Test public void test16NemoGoesDeepAndComesBackAndReleaseCapsule() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("ddduum");
-		comparePositions(new Coordinates(0,0),new North(),-1,nemo);	
+		comparePositions(new Coordinates(0,0), new North(), -1, nemo.move("ddduum"));	
 	}
 	
 	@Test public void test17checkDepthWorksCorrectly() {
 		Nemo nemo = new Nemo(new Coordinates (0,0), new North());
-		nemo.move("dddddddddduuud");
-		comparePositions(new Coordinates(0,0),new North(),-8,nemo);	
+		comparePositions(new Coordinates(0,0), new North(), -8, nemo.move("dddddddddduuud"));	
 	}
 		
-	
-	
 	private void comparePositions(Coordinates coordinates,Direction direction,int profundidad, Nemo nemo) {
 		assertEquals(nemo.getCoordinates(), coordinates);
 		assertEquals(nemo.getDirection(), direction);
 		assertEquals(nemo.profundidad(), profundidad);
 	}
 	
-	private void assertThrowsLike(Executable executable,Nemo nemo) {
-		assertEquals(assertThrows(Error.class, executable).getMessage(), Explosion);
+    private void assertThrowsLike( Executable executable, String message ) {
+	    assertEquals( message,
+	                  assertThrows( Error.class, executable ).getMessage() );
 	}
-	
 }
 
 

@@ -1,6 +1,6 @@
 package nemo;
 
-public class Superficie extends DepthStates {
+public class Surface extends DepthStates {
 
 	@Override
 	public Object take() {
@@ -8,7 +8,7 @@ public class Superficie extends DepthStates {
 	}
 
 	@Override
-	public DepthStates add(Object cargo) {
+	public DepthStates add(Object depthlevel) {
 		return nivelUno();
 	}
 
@@ -21,5 +21,4 @@ public class Superficie extends DepthStates {
 	public int size() {
 		return 0;
 	}
-
 }
