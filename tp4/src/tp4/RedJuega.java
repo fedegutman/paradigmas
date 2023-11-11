@@ -3,19 +3,27 @@ package tp4;
 import java.util.Objects;
 
 public class RedJuega extends EstadoTurno {
+	public Linea linea ;
 	private String colour ;
 
-	public RedJuega() {
+	public RedJuega(Linea linea) {
 		this.colour="red" ;
+		this.linea=linea ;
+		
 	}
 
-	@Override
-	public EstadoTurno juegaRojo() {
-		return new BlueJuega();
-	}
+	
+	public void juegaRojo(int x) {
+		linea.putRedFicha(x);
+		linea.juegaBlue();	
+		linea.drawGame();
+		linea.gameWon(x);
+//		linea.isGameWonHorizontal(x);
 
-	@Override
-	public EstadoTurno juegaAzul() {
+		}
+
+	
+	public void juegaAzul(int x) {
 		throw new Error("No es tu turno");
 	}
 

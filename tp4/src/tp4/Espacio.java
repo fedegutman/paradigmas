@@ -2,29 +2,33 @@ package tp4;
 
 import java.util.Objects;
 
-public class BlueFicha extends Ficha {
+public class Espacio extends Ficha {
+	
 	private String colour ;
 	private char character ;
 
-	public BlueFicha() {
-		this.colour = "blue" ;
-		this.character = 'O';
+	public Espacio() {
+		this.colour=" " ;
+		this.character= '-';
 	}
-	
+
+
+	@Override
 	public boolean isFichaRed() {
 		return false;
 	}
-	
+
+	@Override
 	public boolean isFichaBlue() {
-		return true;
+		return false;
 	}
-	
-	
-	
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(colour);
+		return Objects.hash(character, colour);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -34,20 +38,8 @@ public class BlueFicha extends Ficha {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BlueFicha other = (BlueFicha) obj;
-		return Objects.equals(colour, other.colour);
+		Espacio other = (Espacio) obj;
+		return character == other.character && Objects.equals(colour, other.colour);
 	}
-
-
-
-
-
-
-
-
-
-
-	
-	
 
 }

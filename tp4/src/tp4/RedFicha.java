@@ -4,16 +4,29 @@ import java.util.Objects;
 
 public class RedFicha extends Ficha {
 	private String colour ;
+	private char character ;
 
 	public RedFicha() {
 		this.colour="red" ;
+		this.character= 'X';
 	}
 
+
+	public boolean isFichaRed() {
+		return true;
+	}
+
+	
+	public boolean isFichaBlue() {
+		return false;
+	}
+	
+	
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(colour);
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -25,6 +38,21 @@ public class RedFicha extends Ficha {
 		RedFicha other = (RedFicha) obj;
 		return Objects.equals(colour, other.colour);
 	}
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+	
 	
 	
 	

@@ -1,8 +1,9 @@
 package tp4;
 
 public abstract class EstadoTurno {
-	public abstract EstadoTurno juegaRojo();
-	public abstract EstadoTurno juegaAzul();
+	
+	public abstract void juegaRojo(int x);
+	public abstract void juegaAzul(int x);
 
 
 }

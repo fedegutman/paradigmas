@@ -3,22 +3,29 @@ package tp4;
 import java.util.Objects;
 
 public class BlueJuega extends EstadoTurno {
-	
+	public Linea linea ;
 	private String colour ;
 
-	public BlueJuega() {
+	public BlueJuega(Linea linea) {
 		this.colour="blue" ;
+		this.linea=linea ;
+		
 	}
 	
 	
-	@Override
-	public EstadoTurno juegaRojo() {
+	
+	public void juegaRojo(int x) {
 		throw new Error ("No es tu turno");
 	}
 
-	@Override
-	public EstadoTurno juegaAzul() {
-		return new RedJuega();	
+
+	public void juegaAzul(int x ) {
+		linea.putBlueFicha(x);
+		linea.juegaRojo();
+		linea.drawGame();
+		linea.gameWon(x);
+//		linea.isGameWonHorizontal(x);
+		
 		}
 
 
@@ -39,6 +46,7 @@ public class BlueJuega extends EstadoTurno {
 		BlueJuega other = (BlueJuega) obj;
 		return Objects.equals(colour, other.colour);
 	}
+
 	
 
 }
