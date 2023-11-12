@@ -4,13 +4,14 @@ import java.util.Objects;
 
 public class RedFicha extends Ficha {
 	private String colour ;
-	private char character ;
 
 	public RedFicha() {
-		this.colour="red" ;
-		this.character= 'X';
+		this.colour = "blue" ;
 	}
-
+	
+	public String getRepresentation() {
+		return "X";
+	}
 
 	public boolean isFichaRed() {
 		return true;

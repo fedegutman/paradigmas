@@ -23,8 +23,6 @@ public class BlueJuega extends EstadoTurno {
 		linea.putBlueFicha(x);
 		linea.juegaRojo();
 		linea.drawGame();
-		linea.gameWon(x);
-//		linea.isGameWonHorizontal(x);
 		
 		}
 

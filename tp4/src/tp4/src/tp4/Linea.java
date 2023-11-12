@@ -8,12 +8,14 @@ public class Linea {
 	public List<List<Ficha>> tablero = new ArrayList() ;
 	private int altura;
 	public EstadoTurno turno;
-	public Character modoJuego;
+	public int base;
+	public ModoJuego modoJuego;
 
 	public Linea(int base, int altura, char c) {
 		this.turno= new RedJuega(this);
 		this.altura = altura;
-		this.modoJuego = c ;
+		this.base = base;
+		this.modoJuego= ModoJuego.getModoJuego(c);
 		int i;
 		 for (i = 0; i < base; i++) {
 	            tablero.add(new ArrayList<>(altura));
@@ -21,14 +23,8 @@ public class Linea {
 		
 	}
 	
-	public boolean modoJuegoA() {
-		return this.modoJuego == 'a' ;
-	}
-
-	
-	
 	public void playBlueAt(int x) {
-		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base()) {
+		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 		}
 		turno.juegaAzul(x);
@@ -37,7 +33,7 @@ public class Linea {
 	}
 
 	public void playRedkAt(int x) {
-		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base()) {
+		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 		}
 		turno.juegaRojo(x);
@@ -45,7 +41,7 @@ public class Linea {
 	}
 		
 	public Ficha getItem(int x, int y) {
-		if (x <= 0 || y<= 0 || x>base()|| y>altura) {
+		if (x <= 0 || y<= 0 || x>base|| y>altura) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 
 		}
@@ -53,9 +49,6 @@ public class Linea {
 	}
 
 
-	public Integer base() {
-		return tablero.size();
-	}
 	
 	public boolean isGameDrawed() {
 		 return tablero.stream().allMatch(lista -> lista.size() == altura);
@@ -72,26 +65,25 @@ public class Linea {
 
 	public void putBlueFicha(int x) {
 		tablero.get(x-1).add(new BlueFicha());	
+		modoJuego.gameWon(x,this);
 	}
 
 	public void juegaRojo() {
 		turno= new RedJuega(this);
+		
 	}
-
-
 
 	public void putRedFicha(int x) {
 		tablero.get(x-1).add(new RedFicha());
+		modoJuego.gameWon(x,this);
 		
 	}
 	
 	
 	public void gameWon(int x) {
-		if (isGameWonVertical(x)||isGameWonHorizontal(x) || isGameWonRightDiagonaly(x)||isGameWonLeftDiagonaly(x)) {
-			throw new RuntimeException("Ganaste bro");
-		}
-	}
+		modoJuego.gameWon(x, this);
 
+		}
 
 	public void juegaBlue() {
 		turno = new BlueJuega(this);
@@ -108,7 +100,7 @@ public class Linea {
 	public boolean isGameWonHorizontal(int x) {
 	    int yIndex = tablero.get(x - 1).size() - 1;
 
-	    long count = IntStream.range(0, base() - 1)
+	    long count = IntStream.range(0, base - 1)
 	            .filter(i -> tablero.get(i).size() > yIndex && tablero.get(i + 1).size() > yIndex)
 	            .filter(i -> tablero.get(i).get(yIndex).equals(tablero.get(i + 1).get(yIndex)))
 	            .count();
@@ -119,14 +111,14 @@ public class Linea {
 	public boolean isGameWonRightDiagonaly(int x) {
 	    int count = 0;
 	    int xIndex = x - 4;
-	    int yIndex = tablero.get(x - 1).size() - 4;
+	    int yIndex = tablero.get(x - 1).size() -4;
 
 	    for (int i = 0; i < 8; i++) {
 	        int currentX = xIndex + i;
 	        int currentY = yIndex + i;
 
-	        if (currentX >= 0 && currentY >= 0 && currentX<base()-1) { 
-	        		if (tablero.get(currentX).size() >= currentY) {
+	        if (currentX >= 0 && currentY >= 0 && currentX<base-1) { 
+	        		if (tablero.get(currentX).size() > currentY) {
 	        				if(tablero.get(currentX+1).size() > currentY +1 ){
 	        			if (tablero.get(currentX).get(currentY).equals(tablero.get(currentX+1).get(currentY+1))) {
 	        				count++;
@@ -155,7 +147,7 @@ public class Linea {
 	        int currentX = xIndex + i;
 	        int currentY = yIndex - i;
 
-	        if (currentX >= 0 && currentY >= 1 && currentX < base()) { 
+	        if (currentX >= 0 && currentY >= 1 && currentX < base-1) { 
 	        		if (tablero.get(currentX).size() > currentY) {
 	        				if(tablero.get(currentX+1).size() > currentY -1 ){
 	        			if (tablero.get(currentX).get(currentY).equals(tablero.get(currentX+1).get(currentY-1))) {
@@ -176,8 +168,50 @@ public class Linea {
 	
 		return false;
 	}
-	
+	public String show() {
+	    StringBuilder diagram = new StringBuilder();
+
+	    for (int i = altura - 1; i >= 0; i--) {
+	        diagram.append("| ");
+
+	        for (int j = 0; j < base; j++) {
+	            List<Ficha> columna = tablero.get(j);
+
+	            if (columna.size() > i) {
+	                Ficha ficha = columna.get(i);
+	                diagram.append(ficha instanceof RedFicha || ficha instanceof BlueFicha ? ficha.getRepresentation() + " " : " - ");
+	            } else {
+	                diagram.append(" -");
+	            }
+	        }
+	        diagram.append(" |\n");
+	    }
+
+	    for (int j = 0; j < base; j++) {
+	        diagram.append("  ^ ");
+	    }
+
+	    return diagram.toString();
+	}
+
+
+	public boolean gameWonTypeA(int x) {
+		if (isGameWonVertical(x)||isGameWonHorizontal(x)){
+			throw new RuntimeException("Ganaste bro");
+			
+	}
+		return false;
 }
-	
+
+	public boolean gameWonTypeB(int x) {
+		if (isGameWonRightDiagonaly(x)||isGameWonLeftDiagonaly(x)){
+			throw new RuntimeException("Ganaste bro");		
+	}
+		return false;}
+
+	public boolean finished(int x) {
+		return modoJuego.gameWon(x, this);
+	}
+	}
 
 

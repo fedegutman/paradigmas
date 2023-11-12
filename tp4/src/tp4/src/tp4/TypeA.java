@@ -2,12 +2,16 @@ package tp4;
 
 import java.util.Objects;
 
-public class TypeA {
-	public Character string ;
+public class TypeA extends ModoJuego{
 	
-	public TypeA (String c) {
+	public Character string ;
+	public Linea game;
+	
+	public TypeA () {
 		this.string = 'a';
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -24,6 +28,14 @@ public class TypeA {
 			return false;
 		TypeA other = (TypeA) obj;
 		return Objects.equals(string, other.string);
+	}
+
+	protected Character getModo() {
+		return string;
+	}
+
+	public boolean gameWon(int x,Linea game) {
+		return game.gameWonTypeA(x)== true;
 	}
 
 }

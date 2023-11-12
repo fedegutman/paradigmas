@@ -2,10 +2,11 @@ package tp4;
 
 import java.util.Objects;
 
-public class TypeC {
+public class TypeC extends ModoJuego{
 	public Character string ;
+	public Linea game;
 	
-	public TypeC (String c) {
+	public TypeC () {
 		this.string = 'c';
 	}
 
@@ -26,6 +27,18 @@ public class TypeC {
 			return false;
 		TypeC other = (TypeC) obj;
 		return Objects.equals(string, other.string);
+	}
+
+
+
+	protected Character getModo() {
+		return 'c';
+	}
+
+
+
+	public boolean gameWon(int x, Linea game) {
+		return game.gameWonTypeB(x)||game.gameWonTypeA(x)== true ;
 	}
 
 }

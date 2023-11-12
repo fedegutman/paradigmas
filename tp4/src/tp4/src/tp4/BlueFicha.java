@@ -4,24 +4,25 @@ import java.util.Objects;
 
 public class BlueFicha extends Ficha {
 	private String colour ;
-	private char character ;
 
 	public BlueFicha() {
 		this.colour = "blue" ;
-		this.character = 'O';
 	}
 	
+	public String getRepresentation() {
+		return "O";
+	}
+
+
 	public boolean isFichaRed() {
 		return false;
 	}
-	
+
 	public boolean isFichaBlue() {
-		return true;
-	}
-	
-	
-	
-	@Override
+		return true;}
+		
+		
+		@Override
 	public int hashCode() {
 		return Objects.hash(colour);
 	}
@@ -36,6 +37,7 @@ public class BlueFicha extends Ficha {
 			return false;
 		BlueFicha other = (BlueFicha) obj;
 		return Objects.equals(colour, other.colour);
+	}	
 	}
 
 
@@ -50,4 +52,4 @@ public class BlueFicha extends Ficha {
 	
 	
 
-}
+

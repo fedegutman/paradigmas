@@ -2,11 +2,11 @@ package tp4;
 
 import java.util.Objects;
 
-public class TypeB 	{
-	
+public class TypeB extends ModoJuego{
 public Character string ;
+public Linea game;
 
-public TypeB (String c) {
+public TypeB () {
 	this.string = 'b';
 	
 }
@@ -26,6 +26,14 @@ public boolean equals(Object obj) {
 		return false;
 	TypeB other = (TypeB) obj;
 	return Objects.equals(string, other.string);
+}
+
+protected Character getModo() {
+	return 'b';
+}
+
+public boolean gameWon(int x, Linea game) {
+	return game.gameWonTypeB(x)== true;
 }
 
 

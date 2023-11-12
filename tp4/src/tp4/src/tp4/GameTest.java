@@ -12,8 +12,9 @@ public class GameTest {
 	@Test
 	public void test01() {
 	Linea game = new Linea(4,4,'a');
-	assertEquals(4,game.base());
+	assertEquals(4,game.base);
 	assertEquals(game.turno,new RedJuega(game));
+	assertEquals(game.modoJuego, new TypeA());
 	}
 	
 	@Test
@@ -67,7 +68,7 @@ public class GameTest {
 	
 	@Test
 	public void test06() {
-	    Linea game = new Linea(7, 9, 'a');
+	    Linea game = new Linea(7, 9, 'b');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
 	    game.playRedkAt(2);
@@ -84,7 +85,7 @@ public class GameTest {
 	
 	@Test
 	public void test07() {
-	    Linea game = new Linea(7, 9, 'a');
+	    Linea game = new Linea(7, 9, 'b');
 	    game.playRedkAt(1);
 	    game.playBlueAt(1);
 	    game.playRedkAt(1);
@@ -102,30 +103,56 @@ public class GameTest {
 	
 	@Test
 	public void test08() {
-	    Linea game = new Linea(7, 9, 'a');
+	    Linea game = new Linea(7, 9, 'c');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
 	    game.playRedkAt(3);
-	    game.playBlueAt(4);
-	    game.playRedkAt(5);
-	    game.playBlueAt(6);
-	    game.playRedkAt(1);
-	    game.playBlueAt(2);
-	    game.playRedkAt(3);
-	    game.playBlueAt(4);
-	    game.playRedkAt(5);
-	    game.playBlueAt(6);
-	    game.playRedkAt(3);
-	    game.playBlueAt(4);
-	    game.playRedkAt(4);
 	    game.playBlueAt(5);
-	    game.playRedkAt(5);
-	    game.playBlueAt(6);
+	    game.playRedkAt(2);
+	    game.playBlueAt(3);
+	    game.playRedkAt(7);
+	    game.playBlueAt(5);
 	    game.playRedkAt(6);
-	    game.playBlueAt(6);
-	    game.playRedkAt(5);
+	    game.playBlueAt(3);
+	    game.playRedkAt(4);
+	    game.playBlueAt(3);
+	    game.playRedkAt(2);
 	    game.playBlueAt(7);
 	    game.playRedkAt(6);
+	    game.playBlueAt(1);
+	    game.playRedkAt(2);
+	    game.playBlueAt(1);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(4);
+		assertThrowsLike(() -> game.playBlueAt(4), "Ganaste bro");
+		
+	System.out.println(game.show());}
+	
+		
+		@Test
+		public void test09() {
+			Linea game = new Linea(3, 3, 'a');
+			System.out.println(game.show());
+			
+			game.playRedkAt(1);
+			assertEquals(game.getItem(1, 1), new RedFicha());
+			
+			game.playBlueAt(1);
+			assertEquals(game.getItem(1, 2), new BlueFicha());
+			
+			game.playRedkAt(1);
+			assertEquals(game.getItem(1, 3), new RedFicha());
+			
+			System.out.println(game.show());
+			
+			game.playBlueAt(2);
+			assertEquals(game.getItem(2, 1), new BlueFicha());
+					
+			System.out.println(game.show());
+		
+
+	    
 	
 		
 	}

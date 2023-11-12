@@ -17,7 +17,6 @@ public class RedJuega extends EstadoTurno {
 		linea.putRedFicha(x);
 		linea.juegaBlue();	
 		linea.drawGame();
-		linea.gameWon(x);
 
 		}
 
