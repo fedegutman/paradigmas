@@ -181,7 +181,7 @@ public class Linea {
 	                Ficha ficha = columna.get(i);
 	                diagram.append(ficha instanceof RedFicha || ficha instanceof BlueFicha ? ficha.getRepresentation() + " " : " - ");
 	            } else {
-	                diagram.append(" -");
+	                diagram.append("- ");
 	            }
 	        }
 	        diagram.append(" |\n");
