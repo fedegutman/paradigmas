@@ -8,22 +8,27 @@ public class Linea {
 	public List<List<Ficha>> tablero = new ArrayList() ;
 	private int altura;
 	public EstadoTurno turno;
+	public Character modoJuego;
 
 	public Linea(int base, int altura, char c) {
 		this.turno= new RedJuega(this);
 		this.altura = altura;
+		this.modoJuego = c ;
 		int i;
-		int j;
 		 for (i = 0; i < base; i++) {
 	            tablero.add(new ArrayList<>(altura));
 	          }
 		
 	}
+	
+	public boolean modoJuegoA() {
+		return this.modoJuego == 'a' ;
+	}
 
 	
 	
 	public void playBlueAt(int x) {
-		if (x <= 0) {
+		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base()) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 		}
 		turno.juegaAzul(x);
@@ -32,7 +37,7 @@ public class Linea {
 	}
 
 	public void playRedkAt(int x) {
-		if (x <= 0 || tablero.get(x-1).size()== altura) {
+		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base()) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 		}
 		turno.juegaRojo(x);
@@ -82,7 +87,7 @@ public class Linea {
 	
 	
 	public void gameWon(int x) {
-		if (isGameWonVertical(x)||isGameWonHorizontal(x) || isGameWonRightDiagonaly(x)) {
+		if (isGameWonVertical(x)||isGameWonHorizontal(x) || isGameWonRightDiagonaly(x)||isGameWonLeftDiagonaly(x)) {
 			throw new RuntimeException("Ganaste bro");
 		}
 	}
@@ -111,20 +116,66 @@ public class Linea {
 	    return count == 3;}
 	
 	
-	public boolean isGameWonRightDiagonaly (int x) {
-		int yIndex = tablero.get(x - 1).size() - 1;
-		int yIntercept= yIndex - x - 1;
+	public boolean isGameWonRightDiagonaly(int x) {
+	    int count = 0;
+	    int xIndex = x - 4;
+	    int yIndex = tablero.get(x - 1).size() - 4;
 
-	    long count = IntStream.range(0, base() - 1)
-	    		.filter(i-> yIndex >= 4 )
-	            .filter(i -> tablero.get(i).size() >= yIntercept && tablero.get(i + 1).size() > yIntercept + 1 )
-	            .filter(i -> tablero.get(i).get(yIntercept).equals(tablero.get(i + 1).get(yIntercept + 1)))
-	            .count();
+	    for (int i = 0; i < 8; i++) {
+	        int currentX = xIndex + i;
+	        int currentY = yIndex + i;
 
-	    return count == 3;
+	        if (currentX >= 0 && currentY >= 0 && currentX<base()-1) { 
+	        		if (tablero.get(currentX).size() >= currentY) {
+	        				if(tablero.get(currentX+1).size() > currentY +1 ){
+	        			if (tablero.get(currentX).get(currentY).equals(tablero.get(currentX+1).get(currentY+1))) {
+	        				count++;
+
+	        				if (count == 3) {
+	                    return true;
+	                }
+	            } else {
+	                count = 0;
+	            }
+	        } else {
+	            count = 0;
+	        }}}
+	    }
+
+	
+		return false;
 	}
 	
+	public boolean isGameWonLeftDiagonaly(int x) { // no funca
+	    int count = 0;
+	    int xIndex = x - 4; // 0
+	    int yIndex = tablero.get(x - 1).size() +2 ; // 5
 
+	    for (int i = 0; i < 8; i++) {
+	        int currentX = xIndex + i;
+	        int currentY = yIndex - i;
+
+	        if (currentX >= 0 && currentY >= 1 && currentX < base()) { 
+	        		if (tablero.get(currentX).size() > currentY) {
+	        				if(tablero.get(currentX+1).size() > currentY -1 ){
+	        			if (tablero.get(currentX).get(currentY).equals(tablero.get(currentX+1).get(currentY-1))) {
+	        				count++;
+	        			    System.out.println( count);
+
+	        				if (count == 3) {
+	                    return true;
+	                }
+	            } else {
+	                count = 0;
+	            }
+	        } else {
+	            count = 0;
+	        }}}
+	    }
+
+	
+		return false;
+	}
 	
 }
 	

@@ -12,7 +12,6 @@ public class GameTest {
 	@Test
 	public void test01() {
 	Linea game = new Linea(4,4,'a');
-    System.out.println( game.tablero);
 	assertEquals(4,game.base());
 	assertEquals(game.turno,new RedJuega(game));
 	}
@@ -68,19 +67,67 @@ public class GameTest {
 	
 	@Test
 	public void test06() {
-		Linea game = new Linea(7,9,'a');
-		game.playRedkAt(1);
-		game.playBlueAt(2);
-		game.playRedkAt(2);
-		game.playBlueAt(3);
-		game.playRedkAt(3);
-		game.playBlueAt(4);
-		game.playRedkAt(3);
-		game.playBlueAt(4);
-		game.playRedkAt(4);
-		game.playBlueAt(1);
-		
+	    Linea game = new Linea(7, 9, 'a');
+	    game.playRedkAt(1);
+	    game.playBlueAt(2);
+	    game.playRedkAt(2);
+	    game.playBlueAt(3);
+	    game.playRedkAt(3);
+	    game.playBlueAt(4);
+	    game.playRedkAt(3);
+	    game.playBlueAt(4);
+	    game.playRedkAt(4);
+	    game.playBlueAt(1);
+
 		assertThrowsLike(() -> game.playRedkAt(4), "Ganaste bro"); 
+	}
+	
+	@Test
+	public void test07() {
+	    Linea game = new Linea(7, 9, 'a');
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(2);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(1);
+	    game.playBlueAt(3);
+	    game.playRedkAt(1);
+		assertThrowsLike(() -> game.playBlueAt(4), "Ganaste bro"); 
+
+	}
+	
+	@Test
+	public void test08() {
+	    Linea game = new Linea(7, 9, 'a');
+	    game.playRedkAt(1);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(4);
+	    game.playRedkAt(5);
+	    game.playBlueAt(6);
+	    game.playRedkAt(1);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(4);
+	    game.playRedkAt(5);
+	    game.playBlueAt(6);
+	    game.playRedkAt(3);
+	    game.playBlueAt(4);
+	    game.playRedkAt(4);
+	    game.playBlueAt(5);
+	    game.playRedkAt(5);
+	    game.playBlueAt(6);
+	    game.playRedkAt(6);
+	    game.playBlueAt(6);
+	    game.playRedkAt(5);
+	    game.playBlueAt(7);
+	    game.playRedkAt(6);
+	
+		
 	}
 	
 	
