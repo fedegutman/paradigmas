@@ -9,25 +9,36 @@ import org.junit.jupiter.api.function.Executable;
 
 public class GameTest {
 
+	private static final String TheGameEndsInADraw = "The game ends in a draw";
+	private static final String RedIstheWinner= "Red is the winner";
+	private static final String BlueIsTheWinner = "Blue is the winner";
+
+
+
+
 	@Test
-	public void test01() {
+	public void test01aGameIsInitializedCorrectly() {
 	Linea game = new Linea(4,4,'a');
 	assertEquals(4,game.base);
 	assertEquals(game.turno,new RedJuega(game));
 	assertEquals(game.modoJuego, new TypeA());
-	}
-	
-	@Test
-	public void test02() {
-		Linea game = new Linea(4,4,'a');
-		game.playRedkAt(1);
-		assertEquals(game.getItem(1,1), new RedFicha());
-		assertEquals(game.turno,new BlueJuega(game));
+	System.out.println(game.show());
 
 	}
 	
 	@Test
-	public void test03() {
+	public void test01bAfterFirstMoveGameWorksCorrectly() {
+		Linea game = new Linea(4,4,'a');
+		game.playRedkAt(1);
+		assertEquals(game.getItem(1,1), new RedFicha());
+		assertEquals(game.turno,new BlueJuega(game));
+		System.out.println(game.show());
+
+
+	}
+	
+	@Test
+	public void test01cAfterManyMovesGameWorksCorrectly() {
 		Linea game = new Linea(4,4,'a');
 		game.playRedkAt(1);
 		game.playBlueAt(1);
@@ -37,11 +48,13 @@ public class GameTest {
 		game.playRedkAt(4);
 		assertEquals(game.getItem(4,1), new RedFicha());
 		assertEquals(game.turno,new BlueJuega(game));
+		System.out.println(game.show());
+
 
 	}
 	@Test
-	public void test04() {
-		Linea game = new Linea(4,9,'a');
+	public void test02aRedIsVerticalWinner() {
+		Linea game = new Linea(4,4,'a');
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -49,11 +62,30 @@ public class GameTest {
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 
-		assertThrowsLike(() -> game.playRedkAt(1), "Ganaste bro");
+		assertThrowsLike(() -> game.playRedkAt(1), RedIstheWinner);
+		System.out.println(game.show());
+
 		
 	}
 	@Test
-	public void test05() {
+	public void test02bBlueIsVerticalWinner() {
+		Linea game = new Linea(4,9,'a');
+		game.playRedkAt(4);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+
+		assertThrowsLike(() -> game.playBlueAt(2), BlueIsTheWinner);
+		System.out.println(game.show());
+
+	}
+	
+	
+	@Test
+	public void test03aRedIsHorizontalWinner() {
 		Linea game = new Linea(4,9,'a');
 		game.playRedkAt(1);
 		game.playBlueAt(1);
@@ -63,11 +95,28 @@ public class GameTest {
 		game.playBlueAt(3);
 		
 
-		assertThrowsLike(() -> game.playRedkAt(4), "Ganaste bro"); 
+		assertThrowsLike(() -> game.playRedkAt(4), RedIstheWinner); 
+		System.out.println(game.show());
+
+	}
+	@Test
+	public void test03bBlueIsHorizontalWinner() {
+		Linea game = new Linea(5,9,'a');
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(3);
+		game.playRedkAt(2);
+		game.playBlueAt(4);
+		game.playRedkAt(2);
+	
+		assertThrowsLike(() -> game.playBlueAt(5), BlueIsTheWinner); 
+		
+		System.out.println(game.show());
 	}
 	
 	@Test
-	public void test06() {
+	public void test04aRedIsDiagonalRightWinner() {
 	    Linea game = new Linea(7, 9, 'b');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
@@ -80,11 +129,50 @@ public class GameTest {
 	    game.playRedkAt(4);
 	    game.playBlueAt(1);
 
-		assertThrowsLike(() -> game.playRedkAt(4), "Ganaste bro"); 
+		assertThrowsLike(() -> game.playRedkAt(4), RedIstheWinner); 
+		System.out.println(game.show());
+
 	}
 	
 	@Test
-	public void test07() {
+	public void test04bBlueIsDiagonalRightWinner() {
+	    Linea game = new Linea(7, 9, 'b');
+	    game.playRedkAt(2);
+	    game.playBlueAt(1);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(3);
+	    game.playRedkAt(4);
+	    game.playBlueAt(4);
+	    game.playRedkAt(4);
+
+		assertThrowsLike(() -> game.playBlueAt(4), BlueIsTheWinner); 
+		System.out.println(game.show());
+
+	}
+	
+	@Test
+	public void test05aRedIsDiagonalLeftWinner() {
+	    Linea game = new Linea(7, 9, 'b');
+	    game.playRedkAt(4);
+	    game.playBlueAt(3);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(2);
+	    game.playBlueAt(1);
+	    game.playRedkAt(2);
+	    game.playBlueAt(1);
+	    game.playRedkAt(1);
+	    game.playBlueAt(4);
+		assertThrowsLike(() -> game.playRedkAt(1), RedIstheWinner); 
+
+		System.out.println(game.show());
+
+	}
+	
+	@Test
+	public void test05bBlueIsDiagonalLeftWinner() {
 	    Linea game = new Linea(7, 9, 'b');
 	    game.playRedkAt(1);
 	    game.playBlueAt(1);
@@ -97,12 +185,109 @@ public class GameTest {
 	    game.playRedkAt(1);
 	    game.playBlueAt(3);
 	    game.playRedkAt(1);
-		assertThrowsLike(() -> game.playBlueAt(4), "Ganaste bro"); 
+		assertThrowsLike(() -> game.playBlueAt(4), BlueIsTheWinner); 
+		System.out.println(game.show());
 
 	}
 	
 	@Test
-	public void test08() {
+	public void test06aDiagonalWinDoesntWorkInTypeA() {
+	    Linea game = new Linea(7, 9, 'a');
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(2);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(1);
+	    game.playBlueAt(3);
+	    game.playRedkAt(1);
+	    game.playBlueAt(4);
+	    assertFalse(game.finished);
+		System.out.println(game.show());
+
+	}
+	
+	@Test
+	public void test06bVerticalWinDoesntWorkInTypeB() {
+		Linea game = new Linea(4,9,'b');
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		assertFalse(game.finished);
+		System.out.println(game.show());
+
+	}
+	@Test
+	public void test06cHorizontalWinDoesntWorkInTypeB() {
+	    Linea game = new Linea(7, 9, 'b');
+	    game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(3);
+		game.playRedkAt(2);
+		game.playBlueAt(4);
+		game.playRedkAt(2);
+		game.playBlueAt(5);
+		assertFalse(game.finished);
+		System.out.println(game.show());
+
+	}
+	
+	@Test
+	public void test07aDiagonalWinDoesWorkInTypeC() {
+	    Linea game = new Linea(7, 9, 'c');
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(1);
+	    game.playBlueAt(1);
+	    game.playRedkAt(2);
+	    game.playBlueAt(2);
+	    game.playRedkAt(3);
+	    game.playBlueAt(2);
+	    game.playRedkAt(1);
+	    game.playBlueAt(3);
+	    game.playRedkAt(1);
+		assertThrowsLike(() -> game.playBlueAt(4), BlueIsTheWinner);
+	    
+	}
+	
+	@Test
+	public void test07bVerticalWinDoesWorkInTypeB() {
+		Linea game = new Linea(4,5,'c');
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		assertThrowsLike(() -> game.playRedkAt(1), RedIstheWinner);
+
+		
+	}
+	@Test
+	public void test07cHorizontalWinDoesWorkInTypeC() {
+		Linea game = new Linea(5, 6, 'c');
+	    game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(1);
+		game.playBlueAt(3);
+		game.playRedkAt(2);
+		game.playBlueAt(4);
+		game.playRedkAt(2);
+		assertThrowsLike(() -> game.playBlueAt(5), BlueIsTheWinner);
+
+	}
+	
+	
+	@Test
+	public void test08aComplicatedWin() {
 	    Linea game = new Linea(7, 9, 'c');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
@@ -125,13 +310,76 @@ public class GameTest {
 	    game.playRedkAt(3);
 	    game.playBlueAt(2);
 	    game.playRedkAt(4);
-		assertThrowsLike(() -> game.playBlueAt(4), "Ganaste bro");
-		
-	System.out.println(game.show());}
+		assertThrowsLike(() -> game.playBlueAt(4), BlueIsTheWinner);
+		System.out.println(game.show());
+
+	}	
+	
+	@Test
+	public void test09aDrawInTypeA() {
+		Linea game = new Linea(3, 3, 'a');
+	    game.playRedkAt(1);
+		game.playBlueAt(1);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(2);
+		game.playBlueAt(2);
+		game.playRedkAt(3);
+		game.playBlueAt(3);
+		assertThrowsLike(() -> game.playRedkAt(3), TheGameEndsInADraw);
+	}
+	
+	@Test
+	public void test09bDrawInTypeB() {
+		Linea game = new Linea(3, 3, 'b');
+	    game.playRedkAt(1);
+		game.playBlueAt(1);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(2);
+		game.playBlueAt(2);
+		game.playRedkAt(3);
+		game.playBlueAt(3);
+
+		assertThrowsLike(() -> game.playRedkAt(3), TheGameEndsInADraw);
+	}
+	
+	@Test
+	public void test09cDrawInTypeC() {
+		Linea game = new Linea(3, 3, 'c');
+	    game.playRedkAt(1);
+		game.playBlueAt(1);
+		game.playRedkAt(1);
+		game.playBlueAt(2);
+		game.playRedkAt(2);
+		game.playBlueAt(2);
+		game.playRedkAt(3);
+		game.playBlueAt(3);
+		assertThrowsLike(() -> game.playRedkAt(3), TheGameEndsInADraw);
+		System.out.println(game.show());
+
+	}
+	
+	@Test
+	public void test10aErrors() {
+		Linea game = new Linea(3, 3, 'c');
+		assertThrowsLike(() -> game.playRedkAt(-1), "Invalid index: -1");
+	}
+	
+	@Test
+	public void test10bErrors() {
+		Linea game = new Linea(3, 3, 'c');
+		game.playRedkAt(1);
+		game.playBlueAt(1);
+		game.playRedkAt(1);
+		assertThrowsLike(() -> game.playBlueAt(1), "Invalid index: 1");
+		System.out.println(game.show());
+
+	}
 	
 		
 		@Test
-		public void test09() {
+		public void test11ShowWorksCorrectly() {
 			Linea game = new Linea(3, 3, 'a');
 			System.out.println(game.show());
 			
@@ -150,11 +398,6 @@ public class GameTest {
 			assertEquals(game.getItem(2, 1), new BlueFicha());
 					
 			System.out.println(game.show());
-		
-
-	    
-	
-		
 	}
 	
 	

@@ -4,6 +4,7 @@ public abstract class EstadoTurno {
 	
 	public abstract void juegaRojo(int x);
 	public abstract void juegaAzul(int x);
+	protected abstract String player();
 
 
 }

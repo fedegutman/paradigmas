@@ -10,11 +10,13 @@ public class Linea {
 	public EstadoTurno turno;
 	public int base;
 	public ModoJuego modoJuego;
+	public boolean finished;
 
 	public Linea(int base, int altura, char c) {
 		this.turno= new RedJuega(this);
 		this.altura = altura;
 		this.base = base;
+		this.finished= false;
 		this.modoJuego= ModoJuego.getModoJuego(c);
 		int i;
 		 for (i = 0; i < base; i++) {
@@ -24,7 +26,7 @@ public class Linea {
 	}
 	
 	public void playBlueAt(int x) {
-		if (x <= 0 || tablero.get(x-1).size()== altura|| x>base) {
+		if (x <= 0 || tablero.get(x-1).size()== altura || x>base) {
 	        throw new IndexOutOfBoundsException("Invalid index: " + x);
 		}
 		turno.juegaAzul(x);
@@ -56,7 +58,7 @@ public class Linea {
 	
 	public void drawGame() {
 		if (isGameDrawed()) {
-			throw new RuntimeException("Empataste bro");
+			throw new RuntimeException("The game ends in a draw");
 		}
 	}
 
@@ -152,8 +154,6 @@ public class Linea {
 	        				if(tablero.get(currentX+1).size() > currentY -1 ){
 	        			if (tablero.get(currentX).get(currentY).equals(tablero.get(currentX+1).get(currentY-1))) {
 	        				count++;
-	        			    System.out.println( count);
-
 	        				if (count == 3) {
 	                    return true;
 	                }
@@ -187,17 +187,14 @@ public class Linea {
 	        diagram.append(" |\n");
 	    }
 
-	    for (int j = 0; j < base; j++) {
-	        diagram.append("  ^ ");
-	    }
-
 	    return diagram.toString();
 	}
 
 
 	public boolean gameWonTypeA(int x) {
 		if (isGameWonVertical(x)||isGameWonHorizontal(x)){
-			throw new RuntimeException("Ganaste bro");
+			this.finished = true;
+			throw new RuntimeException(turno.player()+"is the winner");
 			
 	}
 		return false;
@@ -205,12 +202,17 @@ public class Linea {
 
 	public boolean gameWonTypeB(int x) {
 		if (isGameWonRightDiagonaly(x)||isGameWonLeftDiagonaly(x)){
-			throw new RuntimeException("Ganaste bro");		
+			this.finished = true;
+			throw new RuntimeException(turno.player()+"is the winner");		
 	}
 		return false;}
 
 	public boolean finished(int x) {
 		return modoJuego.gameWon(x, this);
+	}
+
+	public boolean finished() {
+		return finished;
 	}
 	}
 

@@ -4,15 +4,17 @@ import java.util.Objects;
 
 public class BlueJuega extends EstadoTurno {
 	public Linea linea ;
-	private String colour ;
+	private String player ;
 
 	public BlueJuega(Linea linea) {
-		this.colour="blue" ;
+		this.player= "Blue " ;
 		this.linea=linea ;
 		
 	}
 	
-	
+	public String player() {
+		return player;
+	}
 	
 	public void juegaRojo(int x) {
 		throw new Error ("No es tu turno");
@@ -29,7 +31,7 @@ public class BlueJuega extends EstadoTurno {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(colour);
+		return Objects.hash(player);
 	}
 
 
@@ -42,7 +44,7 @@ public class BlueJuega extends EstadoTurno {
 		if (getClass() != obj.getClass())
 			return false;
 		BlueJuega other = (BlueJuega) obj;
-		return Objects.equals(colour, other.colour);
+		return Objects.equals(player, other.player);
 	}
 
 	
