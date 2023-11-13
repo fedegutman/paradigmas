@@ -18,7 +18,7 @@ public class GameTest {
 
 	@Test
 	public void test01aGameIsInitializedCorrectly() {
-	Linea game = new Linea(4,4,'a');
+	Linea game = new Linea(4,4,'A');
 	assertEquals(4,game.base);
 	assertEquals(game.turno,new RedJuega(game));
 	assertEquals(game.modoJuego, new TypeA());
@@ -28,7 +28,7 @@ public class GameTest {
 	
 	@Test
 	public void test01bAfterFirstMoveGameWorksCorrectly() {
-		Linea game = new Linea(4,4,'a');
+		Linea game = new Linea(4,4,'A');
 		game.playRedkAt(1);
 		assertEquals(game.getItem(1,1), new RedFicha());
 		assertEquals(game.turno,new BlueJuega(game));
@@ -39,7 +39,7 @@ public class GameTest {
 	
 	@Test
 	public void test01cAfterManyMovesGameWorksCorrectly() {
-		Linea game = new Linea(4,4,'a');
+		Linea game = new Linea(4,4,'A');
 		game.playRedkAt(1);
 		game.playBlueAt(1);
 		assertEquals(game.getItem(1,1), new RedFicha());
@@ -54,7 +54,7 @@ public class GameTest {
 	}
 	@Test
 	public void test02aRedIsVerticalWinner() {
-		Linea game = new Linea(4,4,'a');
+		Linea game = new Linea(4,4,'A');
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -69,7 +69,7 @@ public class GameTest {
 	}
 	@Test
 	public void test02bBlueIsVerticalWinner() {
-		Linea game = new Linea(4,9,'a');
+		Linea game = new Linea(4,9,'A');
 		game.playRedkAt(4);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -86,7 +86,7 @@ public class GameTest {
 	
 	@Test
 	public void test03aRedIsHorizontalWinner() {
-		Linea game = new Linea(4,9,'a');
+		Linea game = new Linea(4,9,'A');
 		game.playRedkAt(1);
 		game.playBlueAt(1);
 		game.playRedkAt(2);
@@ -101,7 +101,7 @@ public class GameTest {
 	}
 	@Test
 	public void test03bBlueIsHorizontalWinner() {
-		Linea game = new Linea(5,9,'a');
+		Linea game = new Linea(5,9,'A');
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -117,7 +117,7 @@ public class GameTest {
 	
 	@Test
 	public void test04aRedIsDiagonalRightWinner() {
-	    Linea game = new Linea(7, 9, 'b');
+	    Linea game = new Linea(7, 9, 'B');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
 	    game.playRedkAt(2);
@@ -136,7 +136,7 @@ public class GameTest {
 	
 	@Test
 	public void test04bBlueIsDiagonalRightWinner() {
-	    Linea game = new Linea(7, 9, 'b');
+	    Linea game = new Linea(7, 9, 'B');
 	    game.playRedkAt(2);
 	    game.playBlueAt(1);
 	    game.playRedkAt(3);
@@ -154,7 +154,7 @@ public class GameTest {
 	
 	@Test
 	public void test05aRedIsDiagonalLeftWinner() {
-	    Linea game = new Linea(7, 9, 'b');
+	    Linea game = new Linea(7, 9, 'B');
 	    game.playRedkAt(4);
 	    game.playBlueAt(3);
 	    game.playRedkAt(3);
@@ -173,7 +173,7 @@ public class GameTest {
 	
 	@Test
 	public void test05bBlueIsDiagonalLeftWinner() {
-	    Linea game = new Linea(7, 9, 'b');
+	    Linea game = new Linea(7, 9, 'B');
 	    game.playRedkAt(1);
 	    game.playBlueAt(1);
 	    game.playRedkAt(1);
@@ -192,7 +192,7 @@ public class GameTest {
 	
 	@Test
 	public void test06aDiagonalWinDoesntWorkInTypeA() {
-	    Linea game = new Linea(7, 9, 'a');
+	    Linea game = new Linea(7, 9, 'A');
 	    game.playRedkAt(1);
 	    game.playBlueAt(1);
 	    game.playRedkAt(1);
@@ -212,7 +212,7 @@ public class GameTest {
 	
 	@Test
 	public void test06bVerticalWinDoesntWorkInTypeB() {
-		Linea game = new Linea(4,9,'b');
+		Linea game = new Linea(4,9,'B');
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -226,7 +226,7 @@ public class GameTest {
 	}
 	@Test
 	public void test06cHorizontalWinDoesntWorkInTypeB() {
-	    Linea game = new Linea(7, 9, 'b');
+	    Linea game = new Linea(7, 9, 'B');
 	    game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -242,7 +242,7 @@ public class GameTest {
 	
 	@Test
 	public void test07aDiagonalWinDoesWorkInTypeC() {
-	    Linea game = new Linea(7, 9, 'c');
+	    Linea game = new Linea(7, 9, 'C');
 	    game.playRedkAt(1);
 	    game.playBlueAt(1);
 	    game.playRedkAt(1);
@@ -260,7 +260,7 @@ public class GameTest {
 	
 	@Test
 	public void test07bVerticalWinDoesWorkInTypeB() {
-		Linea game = new Linea(4,5,'c');
+		Linea game = new Linea(4,5,'C');
 		game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -273,7 +273,7 @@ public class GameTest {
 	}
 	@Test
 	public void test07cHorizontalWinDoesWorkInTypeC() {
-		Linea game = new Linea(5, 6, 'c');
+		Linea game = new Linea(5, 6, 'C');
 	    game.playRedkAt(1);
 		game.playBlueAt(2);
 		game.playRedkAt(1);
@@ -288,7 +288,7 @@ public class GameTest {
 	
 	@Test
 	public void test08aComplicatedWin() {
-	    Linea game = new Linea(7, 9, 'c');
+	    Linea game = new Linea(7, 9, 'C');
 	    game.playRedkAt(1);
 	    game.playBlueAt(2);
 	    game.playRedkAt(3);
@@ -317,7 +317,7 @@ public class GameTest {
 	
 	@Test
 	public void test09aDrawInTypeA() {
-		Linea game = new Linea(3, 3, 'a');
+		Linea game = new Linea(3, 3, 'A');
 	    game.playRedkAt(1);
 		game.playBlueAt(1);
 		game.playRedkAt(1);
@@ -331,7 +331,7 @@ public class GameTest {
 	
 	@Test
 	public void test09bDrawInTypeB() {
-		Linea game = new Linea(3, 3, 'b');
+		Linea game = new Linea(3, 3, 'B');
 	    game.playRedkAt(1);
 		game.playBlueAt(1);
 		game.playRedkAt(1);
@@ -346,7 +346,7 @@ public class GameTest {
 	
 	@Test
 	public void test09cDrawInTypeC() {
-		Linea game = new Linea(3, 3, 'c');
+		Linea game = new Linea(3, 3, 'C');
 	    game.playRedkAt(1);
 		game.playBlueAt(1);
 		game.playRedkAt(1);
@@ -362,13 +362,13 @@ public class GameTest {
 	
 	@Test
 	public void test10aErrors() {
-		Linea game = new Linea(3, 3, 'c');
+		Linea game = new Linea(3, 3, 'C');
 		assertThrowsLike(() -> game.playRedkAt(-1), "Invalid index: -1");
 	}
 	
 	@Test
 	public void test10bErrors() {
-		Linea game = new Linea(3, 3, 'c');
+		Linea game = new Linea(3, 3, 'C');
 		game.playRedkAt(1);
 		game.playBlueAt(1);
 		game.playRedkAt(1);
@@ -380,7 +380,7 @@ public class GameTest {
 		
 		@Test
 		public void test11ShowWorksCorrectly() {
-			Linea game = new Linea(3, 3, 'a');
+			Linea game = new Linea(3, 3, 'A');
 			System.out.println(game.show());
 			
 			game.playRedkAt(1);

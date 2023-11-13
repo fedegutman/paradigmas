@@ -32,7 +32,7 @@ public class TypeC extends ModoJuego{
 
 
 	protected Character getModo() {
-		return 'c';
+		return string;
 	}
 
 

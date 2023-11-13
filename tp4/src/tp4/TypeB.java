@@ -29,7 +29,7 @@ public boolean equals(Object obj) {
 }
 
 protected Character getModo() {
-	return 'b';
+	return string;
 }
 
 public boolean gameWon(int x, Linea game) {
