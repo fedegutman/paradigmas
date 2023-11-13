@@ -8,7 +8,7 @@ public class TypeA extends ModoJuego{
 	public Linea game;
 	
 	public TypeA () {
-		this.string = 'a';
+		this.string = 'A';
 	}
 	
 	

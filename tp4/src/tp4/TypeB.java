@@ -7,7 +7,7 @@ public Character string ;
 public Linea game;
 
 public TypeB () {
-	this.string = 'b';
+	this.string = 'B';
 	
 }
 
