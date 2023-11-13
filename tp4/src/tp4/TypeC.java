@@ -7,7 +7,7 @@ public class TypeC extends ModoJuego{
 	public Linea game;
 	
 	public TypeC () {
-		this.string = 'B';
+		this.string = 'C';
 	}
 
 	
